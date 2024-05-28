@@ -12,26 +12,25 @@
             <a href="#" class="logo"><img src="images/logo3.png" alt="LuzViMin logo" width="150px" height="auto"></a>
 
             <nav class="navbar">
-                <a href="#" style="--i:1;" class="active">Home</a>
-                <a href="" style="--i:2;">About Us</a>
-                <a href="" style="--i:3;">Shop</a>
-                <a href="" style="--i:4;">Log In</a>
+                <a href="#section1" style="--i:1;" class="nav-link">Home</a>
+                <a href="#section2" style="--i:2;" class="nav-link">About Us</a>
+                <a href="#section3" style="--i:3;" class="nav-link">Shop</a>
+                <a href="#" style="--i:4;" class="nav-link">Log In</a>
             </nav>
         </header>
-
-        <section class="home">
+        <section class="home" id="section1">
             <div class="home-content">
                 <h3>Welcome</h3>
                 <h1>Philippine Modern </h1>
                 <h3><span class="multiple-text"></span></h3>
                 <p></p>
                 <div class="social-media">
-                    <a href="https://www.facebook.com/karlorobert.wagan/" style="--i:5;"><i class='bx bxl-facebook-circle'></i></a>
-                    <a href="https://www.twitter.com/YuKARLO15/" style="--i:6;"><i class='bx bxl-twitter' ></i></a>
-                    <a href="https://www.instagram.com/yukarlo_15/" style="--i:7;"><i class='bx bxl-instagram' ></i></a>
-                    <a href="mailto:karlorobertwagan@baliuagu.edu.ph" style="--i:8;"><i class='bx bx-envelope' ></i></a>
+                    <a href="#" style="--i:5;"><i class='bx bxl-facebook-circle'></i></a>
+                    <a href="#" style="--i:6;"><i class='bx bxl-twitter' ></i></a>
+                    <a href="#" style="--i:7;"><i class='bx bxl-instagram' ></i></a>
+                    <a href="#" style="--i:8;"><i class='bx bx-envelope' ></i></a>
                 </div>
-                <a href="about.html" class="button">About me</a>
+                <a href="#section2" class="button">About us</a>
             </div>
                 <div class="col">
                     <div class="card card1">
@@ -45,9 +44,9 @@
                 </div>
             </div>
         </section>
+        <section id="section2">
         <div class="scroll-down"><a href="#biography"><i class='bx bx-chevrons-down'></i></a></div>
         <div class="line"></div>
-
         <header class = "header2">
             <h1>Why LuzViMin ?</h1>
             </header>
@@ -92,8 +91,59 @@
             </p><br>
             </div>
         </section>
+       </section>
         <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
         <script src="script.js"></script>
+
+        <div class="line"></div>
+
+        <!-- Jhaz gallery -->
+        <!--me if check is 1 (show all photos)-->
+        <!--me if check is 2 (gowns)-->
+        <!--me if check is 3 (suits)-->
+
+        <section class="shop"  id="section3">
+            <input type="radio" name="Photos" id="check1" checked>
+            <input type="radio" name="Photos" id="check2">
+            <input type="radio" name="Photos" id="check3">
+
+         
+            <div class="container">
+               <iframe style="border-radius:12px"
+                  
+                  frameBorder="0" allowfullscreen=""
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+               <h1>LuzViMin Styles</h1>
+               <div class="top-content">
+                  <h3>LuzViMin</h3>
+                  <label for="check1">All</label> <!--all photos-->
+                  <label for="check2">Gowns</label>    <!--Family-->
+                  <label for="check3">Suits</label>  <!--place-->
+
+               </div>
+         
+               <div class="photo-gallery">
+         
+                  <div class="pic suit">
+                     <img src="images/suit1.jpg">
+                     <figcaption>Suit</figcaption>
+         
+                  </div>
+                  <div class="pic gown">
+                     <img src="images/gown1.jpeg">
+                     <figcaption>Gown</figcaption>
+                  </div>
+                  
+         
+               </div>
+            </div> &nbsp;
+        </section>
+
+
+
+
+
+
 
          <footer class="footer">
             <div class="footer-container">
@@ -105,19 +155,19 @@
                     <div class="footer-column">
                         <h3>Quick Links</h3>
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="about.html">About Me</a></li>
-                            <li><a href="gallery.html">Gallery</a></li>
-                            <li><a href="contact.html">Contact Me</a></li>
+                            <li><a href="#section1">Home</a></li>
+                            <li><a href="#section2">About Us</a></li>
+                            <li><a href="#section3">Shop</a></li>
+                            <li><a href="#">Log In</a></li>
                         </ul>
                     </div>
                     <div class="footer-column">
                         <h3>Follow Me</h3>
                         <div class="social-icons">
-                            <a href="https://www.facebook.com/karlorobert.wagan/"><i class='bx bxl-facebook-circle'></i></a>
-                            <a href="https://www.twitter.com/YuKARLO15/"><i class='bx bxl-twitter'></i></a>
-                            <a href="https://www.instagram.com/yukarlo_15/"><i class='bx bxl-instagram'></i></a>
-                            <a href="mailto:karlorobertwagan@baliuagu.edu.ph"><i class='bx bx-envelope'></i></a>
+                            <a href="#"><i class='bx bxl-facebook-circle'></i></a>
+                            <a href="#"><i class='bx bxl-twitter'></i></a>
+                            <a href="#"><i class='bx bxl-instagram'></i></a>
+                            <a href="#"><i class='bx bx-envelope'></i></a>
                         </div>
                     </div>
                 </div>
