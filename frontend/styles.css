@@ -323,7 +323,9 @@ body{
 .col{
     margin-top: 80px;
     flex-basis: 50%;
+    position: relative;
 }
+
 .logopic{
     background-image: url(images/logo.png) ;
 }
@@ -340,10 +342,14 @@ body{
     background-size: cover;
     transition: transform 0.5;
     background-repeat: no-repeat;
+    
+
+
 }
 
 .card1{
     background-image: url(images/gown1.jpeg) ;
+    
 }
 
 .card2{
@@ -361,6 +367,12 @@ body{
 .card:hover{
     transform: translateY(-10px);
 }
+
+/** @media only screen and (max-width: 768px) {
+    .card {
+      max-width: 300px;  /* Adjust width for smaller screens *//**
+    }
+  }/
 
 /* KEYFRAMES ANIMATION */
 @keyframes slideRight{
@@ -430,15 +442,16 @@ body{
     background-color: #fff;
     color: black;
     padding: 40px 10%;
-    position: relative;
+    grid-template-columns: repeat(1, 1fr); 
     bottom: 0;
     width: 100%;
 }
 
 .footer-container {
-    max-width: 1200px;
+    max-width: 13500px;
     margin: auto;
     margin-top: 60px;
+
 }
 
 .footer-row {
@@ -534,7 +547,6 @@ body{
     cursor: pointer;
 }
 
-
 .header2 {
     background-color: white;
     padding: 10px;
@@ -610,6 +622,7 @@ body{
     text-align: center;
     margin-top: 20px;
     margin-bottom: 50px;
+  
 
 }
 .shop .line2{
