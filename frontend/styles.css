@@ -42,6 +42,19 @@ body{
     opacity: 0;
     animation: slideRight 1s ease forwards;
 }
+
+.navbar .hovercart {
+    width: 35px; /* Specify the width */
+    height: 35px; /* Specify the height */
+    padding-top: 40px;
+    background-image: url('images/pinkcart.png'); /* Initial background image */
+    background-size: cover; /* Cover the entire area of the element */
+    transition: background-image 0.5s ease-in-out; /* Smooth transition */
+}
+
+.hovercart:hover {
+    background-image: url('images/cart.png'); /* Change on hover */
+}
 .navbar a{
     display: inline-block;
     font-size: 18px;
@@ -321,7 +334,13 @@ body{
 
 /*Additionals*/
 .col{
-    margin-top: 80px;
+    margin-top: 200px;
+    flex-basis: 50%;
+    position: relative;
+}
+
+.col-2{
+    margin-top: 0px;
     flex-basis: 50%;
     position: relative;
 }
@@ -342,9 +361,6 @@ body{
     background-size: cover;
     transition: transform 0.5;
     background-repeat: no-repeat;
-    
-
-
 }
 
 .card1{
@@ -593,10 +609,11 @@ body{
   /*Jhaz gallery css*/
 .shop nav{
     font-size: 20px;
-    text-align: right;
+    text-align: center;
     font-weight: bold;
     padding-top: 5px;
     padding-bottom: 5px;
+
 
 }
 .shop nav a:link {
@@ -620,15 +637,14 @@ body{
 .shop .container{
     width: 100%;
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 50px;
-  
+    margin-top: 30px;
+    margin-bottom: 50px; 
 
 }
 .shop .line2{
     margin-top: 200px;
     border: 3px solid #cc8f0c;
-    margin-bottom: 20px;
+    margin-bottom: 150px;
  }
 
 .shop h1{
@@ -671,15 +687,20 @@ body{
     align-items: center;
     border-radius: 5px; 
     box-shadow: 3px 3px 5px white;
+
 }
 
+.itemcenter{
+display: flex;
+justify-content: space-evenly;
+width :100%
+}
 .shop h3{
     height: 100%;
     background-color:beige;
     line-height: 60px;
     padding: 0 50px;
     color:#cc8f0c;
-
 }
 
 .shop label{
