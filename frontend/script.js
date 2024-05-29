@@ -17,12 +17,13 @@ window.addEventListener('scroll', function() {
     //   const sectionHeight = section.offsetHeight;
   
       // Check if the user has scrolled to this section
-        if (window.pageYOffset >= sectionTop) {
+        if (window.scrollY >= sectionTop) {
         // Remove the "active" class from all navbar links
         navLinks.forEach(link => link.classList.remove('active'));
   
         // Add the "active" class to the correct navbar link
         navLinks[i].classList.add('active');
+        console.log(navLinks[i]);
       }
     });
   });
