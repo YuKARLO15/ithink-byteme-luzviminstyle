@@ -46,7 +46,7 @@ body{
 .navbar .hovercart {
     width: 35px; /* Specify the width */
     height: 35px; /* Specify the height */
-    padding-top: 40px;
+    padding-top: 18px;
     background-image: url('images/pinkcart.png'); /* Initial background image */
     background-size: cover; /* Cover the entire area of the element */
     transition: background-image 0.5s ease-in-out; /* Smooth transition */
