@@ -1,0 +1,38 @@
+{
+  "canisters": {
+    "ithink-byteme-luzviminstyle-icp-backend": {
+      "build": "npx azle ithink-byteme-luzviminstyle-icp-backend",
+      "candid": "src/ithink-byteme-luzviminstyle-icp-backend/ithink-byteme-luzviminstyle-icp-backend.did",
+      "gzip": true,
+      "main": "src/ithink-byteme-luzviminstyle-icp-backend/src/index.ts",
+      "tech_stack": {
+        "cdk": {
+          "azle": {}
+        },
+        "language": {
+          "typescript": {}
+        }
+      },
+      "type": "custom",
+      "wasm": ".azle/ithink-byteme-luzviminstyle-icp-backend/ithink-byteme-luzviminstyle-icp-backend.wasm"
+    },
+    "ithink-byteme-luzviminstyle-icp-frontend": {
+      "dependencies": [
+        "ithink-byteme-luzviminstyle-icp-backend"
+      ],
+      "source": [
+        "src/ithink-byteme-luzviminstyle-icp-frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "ithink-byteme-luzviminstyle-icp-frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
