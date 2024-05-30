@@ -43,22 +43,28 @@ body{
     animation: slideRight 1s ease forwards;
 }
 
+
+/*
 .navbar .hovercart {
-    width: 35px; /* Specify the width */
-    height: 35px; /* Specify the height */
-    padding-top: 18px;
-    background-image: url('images/pinkcart.png'); /* Initial background image */
-    background-size: cover; /* Cover the entire area of the element */
-    transition: background-image 0.5s ease-in-out; /* Smooth transition */
+    width: 30px; /* Specify the width *//*
+    height: 30px; /* Specify the height *//*
+    margin-top: 10px;
+    background-size: cover; /* Cover the entire area of the element *//*
+    transition: background-image 0.5s ease-in-out; /* Smooth transition *//*
+    background-image: url('images/cartgold.png'); /* Initial background image *//*
 }
 
+
 .hovercart:hover {
-    background-image: url('images/cart.png'); /* Change on hover */
-}
+    background-image: url('images/cart.png'); /* Change on hover *//*
+    
+}*/
+
+
 .navbar a{
     display: inline-block;
     font-size: 18px;
-    color:rosybrown;
+    color:#cc8f0c;
     text-decoration: none;
     font-weight: 500;
     margin-right: 85px;
@@ -69,10 +75,13 @@ body{
 }
 .navbar a:hover,
 .navbar a.active{
-    color: #cc8f0c;
+    color: #74540f;
+    font-weight: bold;
+
 }
 .nav-link.active {
-    color: #cc8f0c;
+    color: #74540f;
+    font-weight: bold;
 }
 .home{
     margin-top: 40px;
@@ -131,10 +140,10 @@ body{
     width: 40px;
     height: 40px;
     background: transparent;
-    border: 2px solid rosybrown;
+    border: 2px solid #a1771a;
     border-radius: 50%;
     font-size: 20px;
-    color: rosybrown;
+    color: #a1771a;
     text-decoration: none;
     margin: 30px 15px 30px 0;
     transition: .5s ease;
@@ -143,15 +152,15 @@ body{
     animation-delay: calc(.2s * var(--i));
 }
 .social-media a:hover{
-    background-color: rosybrown;
-    color: #000000;
+    background-color: #cc8f0c;
+    color: #333030;
     box-shadow: 0 0 20px #cc8f0c;
 }
 .button{
     display: inline-block;
     padding: 12px 28px;
     background-color: #cc8f0c;
-    border-radius: 40px;
+    border-radius: 10px;
     box-shadow: 0 0 10px #cc8f0c;
     font-size: 16px;
     color: #000000;
@@ -244,6 +253,12 @@ body{
     text-align: justify;
     align-items: center;
     width: 100%;
+}
+
+.bio-content p {
+    text-align: justify; 
+    margin-left: 70px;
+    margin-right: 70px;   
 }
 
 /*Additionals*/
@@ -481,12 +496,20 @@ body{
     background-color: white;
     padding: 10px;
     text-align: center;
+    
+
   }
   
   .header2 h1 {
     margin: 0;
     padding: 10px 0;
     margin-top: 50px;
+    font-size: xx-large;
+    color: #cc8f0c;
+  }
+  
+  .header2 h1 span {
+    color: black;
   }
   
   .header2 main {
@@ -496,15 +519,35 @@ body{
     padding: 50px 0;
     
   }
-  
+
+
+  .header2 p {
+    margin-left: 80px;
+    margin-right: 80px;
+
+  }
+ 
+ 
   .mission {
     margin-top: 50px;
     text-align: center;
+    margin-bottom: 60px;
   }
-  
+
+  .mission, .benefits, h3 {
+   color: #cc8f0c;
+   font-size: 23px;
+  }
+
+  .mission, .benefits, p {
+    color: black;
+    font-size: medium;
+   }
+ 
   .benefits {
     margin-top: 50px;
     text-align: center;
+    margin-bottom: 60px;
   }
   
   .benefits h3, .benefits p, .mission p, .mission h3 {
@@ -609,6 +652,7 @@ display: flex;
 justify-content: space-evenly;
 width :100%
 }
+
 .shop h3{
     height: 100%;
     background-color:beige;
@@ -635,6 +679,7 @@ width :100%
 .shop label a:visited {
     color: coral;
 }
+
 
 .shop .photo-gallery{
     width: 90%;
