@@ -42,6 +42,6 @@ radioButtons.forEach(radioButton => {
     correspondingLabel.classList.add('active');
     
     // Change label color of selected radio button
-    correspondingLabel.style.color = 'black'; // Replace 'red' with desired color
+    //correspondingLabel.style.color = 'black'; // Replace 'red' with desired color
   });
 });
