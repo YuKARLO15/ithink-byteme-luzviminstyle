@@ -8,10 +8,10 @@ import FooterComponent from '../components/FooterComponent.vue'
 
 <template>
   <main>
-    <HeaderComponent/>
-    <HomeSection/>
-    <AboutSection/>
-    <ShopSection/>
-    <FooterComponent/>
+    <HeaderComponent />
+    <HomeSection />
+    <AboutSection />
+    <ShopSection />
+    <FooterComponent />
   </main>
 </template>
