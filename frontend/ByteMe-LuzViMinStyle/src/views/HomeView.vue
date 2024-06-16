@@ -1,9 +1,17 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import HeaderComponent from '../components/HeaderComponent.vue'
+import HomeSection from '../components/HomeSection.vue'
+import AboutSection from '../components/AboutSection.vue'
+import ShopSection from '../components/ShopSection.vue'
+import FooterComponent from '../components/FooterComponent.vue'
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <HeaderComponent/>
+    <HomeSection/>
+    <AboutSection/>
+    <ShopSection/>
+    <FooterComponent/>
   </main>
 </template>
