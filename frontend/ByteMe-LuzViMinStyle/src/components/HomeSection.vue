@@ -12,8 +12,8 @@
         <a href="#" style="--i: 8"><i class="bx bx-envelope"></i></a>
       </div>
       <a href="#" class="button">Log In </a>
-
-      <div>
+    </div>
+    <div>
         <div class="col">
           <div class="card card1"></div>
           <div class="card card2"></div>
@@ -23,7 +23,6 @@
           <div class="card card4"></div>
         </div>
       </div>
-    </div>
   </section>
 </template>
 
@@ -191,4 +190,11 @@ export default {
 .card:hover {
   transform: translateY(-10px);
 }
+
+/*Misc (Color of the Welcome)*/
+.mission, .benefits, h3 {
+   color: #cc8f0c;
+   font-size: 23px;
+  }
+
 </style>
