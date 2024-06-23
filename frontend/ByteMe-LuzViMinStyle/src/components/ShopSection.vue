@@ -301,4 +301,12 @@ export default {
   /* style for selected labels */
   color: black; /* or your desired color */
 }
+
+/*Miscellaneous*/
+.mission,
+.benefits,
+h3 {
+  color: #cc8f0c;
+  font-size: 23px;
+}
 </style>

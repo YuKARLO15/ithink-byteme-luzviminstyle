@@ -14,15 +14,15 @@
       <a href="#" class="button">Log In </a>
     </div>
     <div>
-        <div class="col">
-          <div class="card card1"></div>
-          <div class="card card2"></div>
-        </div>
-        <div class="col-2">
-          <div class="card card3"></div>
-          <div class="card card4"></div>
-        </div>
+      <div class="col">
+        <div class="card card1"></div>
+        <div class="card card2"></div>
       </div>
+      <div class="col-2">
+        <div class="card card3"></div>
+        <div class="card card4"></div>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -192,9 +192,10 @@ export default {
 }
 
 /*Misc (Color of the Welcome)*/
-.mission, .benefits, h3 {
-   color: #cc8f0c;
-   font-size: 23px;
-  }
-
+.mission,
+.benefits,
+h3 {
+  color: #cc8f0c;
+  font-size: 23px;
+}
 </style>
