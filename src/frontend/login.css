@@ -1,0 +1,357 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins");
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
+}
+html {
+  overflow-x: hidden;
+}
+body {
+  background-color: #fff;
+  color: #000000;
+}
+
+.heading {
+  text-align: center;
+  font-size: 4.5rem;
+}
+.header {
+  position: fixed;
+  background-color: #fff;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 10%;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+.logo {
+  font-size: 10px;
+  color: #000000;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: default;
+  opacity: 0;
+  animation: slideRight 1s ease forwards;
+}
+.navbar a {
+  display: inline-block;
+  font-size: 18px;
+  color: #cc8f0c;
+  text-decoration: none;
+  font-weight: 500;
+  margin-right: 85px;
+  transition: 0.3s;
+  opacity: 0;
+  animation: slideTop 0.5s ease forwards;
+  animation-delay: calc(0.2s * var(--i));
+}
+.navbar a:hover,
+.navbar a.active {
+  color: #74540f;
+  font-weight: bold;
+}
+.nav-link.active {
+  color: #74540f;
+  font-weight: bold;
+}
+
+/* KEYFRAMES ANIMATION */
+@keyframes slideRight {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideLeft {
+  0% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideTop {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slideBottom {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes zoomIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes floatImage {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-24px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* KEYFRAMES ANIMATION (JHAZ) */
+
+@keyframes animate {
+  0% {
+    width: 100px;
+  }
+  50% {
+    width: 200px;
+  }
+  100% {
+    width: 100px;
+  }
+}
+
+/*  MEDIA QUERY? */
+
+@media only screen and (max-width: 768px) {
+  .card {
+    max-width: 300px; /* Adjust width for smaller screens */
+  }
+}
+
+* Reset default browser styles */ * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style for the form container */
+.username {
+  padding: 16px;
+  background-color: #ffffff;
+  margin-top: 250px;
+}
+.pass {
+  padding: 16px;
+  background-color: #ffffff;
+}
+
+.containerbutton {
+  padding: 16px;
+  background-color: #ffffff;
+  padding-top: 30px;
+}
+
+/* Style for form labels */
+label {
+  font-weight: bold;
+  padding-left: 600px;
+  padding-right: 40px;
+}
+
+.check_box {
+  font-weight: bold;
+  padding-left: 80px;
+  padding-right: 40px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+/* Style for form inputs */
+input[type="text"] {
+  width: 20%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+input[type="password"] {
+  width: 20%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Style for the login button */
+button[type="submit"] {
+  background-color: #cc8f0c;
+  color: white;
+  padding: 14px 20px;
+  margin-left: 900px;
+  cursor: pointer;
+  width: 10%;
+}
+
+/* Change button color on hover */
+button[type="submit"]:hover {
+  opacity: 0.8;
+  margin-left: 900px;
+}
+
+/* Float cancel and password elements and add extra margin */
+.cancelbtn {
+  float: left;
+  width: 20%;
+  margin-top: 16px;
+  padding-left: 180px;
+}
+
+.psw {
+  float: left;
+  width: 20%;
+  margin-top: 16px;
+  padding-left: 80px;
+}
+/* Style for the cancel button */
+
+.cancelbtn {
+  background-color: #cb8d09;
+  cursor: pointer;
+  padding: 8px 10px;
+}
+
+.cancelbtn:hover {
+  background-color: #cb8d09; /* Change to a darker shade or different color */
+}
+
+.cancel {
+  padding-left: 560px;
+}
+
+/* Add padding to the password link */
+.psw a {
+  padding-left: 12px;
+  padding-top: 4px;
+}
+
+.psw a:hover {
+  color: #4281c5; /* Hover color */
+}
+
+/* Clear floats after the cancel button */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/*footer*/
+.footer {
+  background-color: #fff;
+  color: black;
+  padding: 40px 10%;
+  grid-template-columns: repeat(1, 1fr);
+  bottom: 0;
+  width: 100%;
+  padding-top: 110px;
+}
+
+.footer-container {
+  max-width: 13500px;
+  margin: auto;
+  margin-top: 60px;
+}
+
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.footer-column {
+  flex: 1;
+  margin: 20px;
+  min-width: 250px;
+}
+
+.footer-column h3 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #cc8f0c;
+}
+
+.footer-column p,
+.footer-column ul {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-column ul li a:hover {
+  color: #cc8f0c;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: space-between;
+  width: 160px;
+}
+
+.social-icons a {
+  color: black;
+  font-size: 24px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.social-icons a:hover {
+  color: #cc8f0c;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #444;
+  margin-top: 20px;
+}
+
+.footer-bottom p {
+  font-size: 14px;
+  color: #726969;
+}
