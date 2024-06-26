@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Log In</title>
+    <title>Sign Up</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="images/logo3.png" type="image/x-icon" />
-    <link rel="stylesheet" href="login.css" />
+    <link rel="stylesheet" href="signup.css" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
@@ -34,17 +34,100 @@
         <a href="#" style="--i: 4" class="hovercart"
           ><i class="fa-solid fa-cart-shopping"></i
         ></a>
-        <!-- <a href="#" style="--i:4;" class="hovercart"><img src = "" ></a> -->
+        <a href="#" style="--i: 4" class="hovercart"><img src="" /></a>
         <a href="signup.html" style="--i: 5" class="nav-link">
           <strong>Sign Up</strong></a
         >
       </nav>
     </header>
+    <div class="signup-form">
+      <h2>Sign Up LuzViMin</h2>
+      <form action="#" method="post">
+        <div class="form-group">
+          <label for="what-they-want">What do you want?</label>
+          <select id="what-they-want" name="what-they-want" required>
+            <option value="">Select an option</option>
+            <option value="Register for an account">
+              Register for an account
+            </option>
+            <option value="Sign up for updates">Sign up for updates</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter your username"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="lastname">Last Name</label>
+          <input
+            type="text"
+            id="lastname"
+            name="lastname"
+            placeholder="Enter your last name"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="firstname">First Name</label>
+          <input
+            type="text"
+            id="firstname"
+            name="firstname"
+            placeholder="Enter your first name"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input
+            type="number"
+            id="age"
+            name="age"
+            placeholder="Enter your age"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email address"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input
+            type="address"
+            id="address"
+            name="address"
+            placeholder="Enter your address"
+            required
+          ></input>
+        </div>
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
 
-
-
-
-    
     <footer class="footer">
       <div class="footer-container">
         <div class="footer-row">

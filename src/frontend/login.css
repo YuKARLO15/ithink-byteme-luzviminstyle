@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins");
+
+/*header*/
 * {
   font-family: "Poppins", sans-serif;
   margin: 0;
@@ -149,6 +151,8 @@ body {
   }
 }
 
+/*login div*/
+
 * Reset default browser styles */ * {
   box-sizing: border-box;
   margin: 0;
@@ -164,6 +168,7 @@ body {
 .pass {
   padding: 16px;
   background-color: #ffffff;
+  padding-left: 20px;
 }
 
 .containerbutton {
