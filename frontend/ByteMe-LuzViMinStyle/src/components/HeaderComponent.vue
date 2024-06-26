@@ -4,17 +4,19 @@
       ><img src="../assets/LuzViMinLogo.png" alt="LuzViMin logo" width="150px" height="auto"
     /></a>
     <nav class="navbar">
-      <a href="#section1" style="--i: 1" class="nav-link">Home</a>
+      <RouterLink to="{ name: 'home', hash: '#section1' }" style="--i: 1" class="nav-link">Home</RouterLink>
       <a href="#section2" style="--i: 2" class="nav-link">About Us</a>
       <a href="#section3" style="--i: 3" class="nav-link">Shop</a>
       <a href="#" style="--i: 4" class="hovercart"><i class="fa-solid fa-cart-shopping"></i></a>
       <!-- <a href="#" style="--i:4;" class="hovercart"><img src = "" ></a> -->
-      <a href="#" style="--i: 5" class="nav-link"> <strong>Sign Up</strong></a>
+      <RouterLink to="/signup" style="--i: 5" class="nav-link"><strong>Sign Up</strong></RouterLink>
     </nav>
   </header>
 </template>
 
 <script>
+import { RouterLink } from 'vue-router';
+
 export default {
   name: 'HeaderComponent'
   // Your component's logic here
