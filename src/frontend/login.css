@@ -170,6 +170,15 @@ body {
   background-color: #ffffff;
   padding-left: 20px;
 }
+.loginform{
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding-top: 180px;
+  padding-left: 1px;
+  padding-right: 100px;
+}
 
 .containerbutton {
   padding: 16px;
