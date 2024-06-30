@@ -240,8 +240,18 @@ button[type="submit"]:hover {
   width: 20%;
   margin-top: 16px;
   padding-left: 180px;
+  color: #fff;
 }
 
+.h4_class{
+  margin-left: 600px;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.h4_class span{
+  color: #cb8d09;
+}
 .psw {
   float: left;
   width: 20%;
@@ -253,11 +263,11 @@ button[type="submit"]:hover {
 .cancelbtn {
   background-color: #cb8d09;
   cursor: pointer;
-  padding: 8px 10px;
+  padding: 12px 10px;
 }
 
 .cancelbtn:hover {
-  background-color: #cb8d09; /* Change to a darker shade or different color */
+  background-color: #d5ad55; /* Change to a darker shade or different color */
 }
 
 .cancel {
@@ -268,6 +278,7 @@ button[type="submit"]:hover {
 .psw a {
   padding-left: 12px;
   padding-top: 4px;
+  size: 14px;
 }
 
 .psw a:hover {
