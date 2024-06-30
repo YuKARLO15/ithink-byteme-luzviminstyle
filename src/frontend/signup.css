@@ -195,8 +195,9 @@ body {
 }
 
 button[type="submit"] {
-  width: 100%;
+  width: 30%;
   padding: 10px;
+  margin-left: 480px;
   background-color: #a87812;
   color: white;
   border: none;

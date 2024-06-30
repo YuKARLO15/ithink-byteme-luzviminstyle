@@ -1,0 +1,364 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+* {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
+}
+html {
+  overflow-x: hidden;
+}
+body {
+  background-color: #fff;
+  color: #000000;
+}
+
+/* KEYFRAMES ANIMATION */
+@keyframes slideRight {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideLeft {
+  0% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideTop {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slideBottom {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes zoomIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes floatImage {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-24px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* KEYFRAMES ANIMATION (JHAZ) */
+
+@keyframes animate {
+  0% {
+    width: 100px;
+  }
+  50% {
+    width: 200px;
+  }
+  100% {
+    width: 100px;
+  }
+}
+
+/*  MEDIA QUERY? */
+
+@media only screen and (max-width: 768px) {
+  .card {
+    max-width: 300px; /* Adjust width for smaller screens */
+  }
+}
+
+.heading {
+  text-align: center;
+  font-size: 4.5rem;
+}
+.header {
+  position: fixed;
+  background-color: #fff;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 10%;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+.logo {
+  font-size: 10px;
+  color: #000000;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: default;
+  opacity: 0;
+  animation: slideRight 1s ease forwards;
+}
+.navbar a {
+  display: inline-block;
+  font-size: 18px;
+  color: #cc8f0c;
+  text-decoration: none;
+  font-weight: 500;
+  margin-right: 85px;
+  transition: 0.3s;
+  opacity: 0;
+  animation: slideTop 0.5s ease forwards;
+  animation-delay: calc(0.2s * var(--i));
+}
+.navbar a:hover,
+.navbar a.active {
+  color: #74540f;
+  font-weight: bold;
+}
+.nav-link.active {
+  color: #74540f;
+  font-weight: bold;
+}
+
+.shop nav {
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .shop nav a:link {
+    color: lightslategray;
+  }
+  .shop nav a:visited {
+    color: lightslategray;
+  }
+  .shop nav a:hover {
+    color: rosybrown;
+  }
+  
+  .shop a {
+    text-decoration: none;
+  }
+  
+  .shop input {
+    display: none;
+  }
+  .shop .container {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 50px;
+  }
+  .shop .line2 {
+    margin-top: 10px;
+    border: 3px solid #cc8f0c;
+    margin-bottom: 150px;
+  }
+  
+  .shop h1 {
+    font-weight: normal;
+    font-size: 35px;
+    position: relative;
+    margin: 40px 0;
+  }
+  
+  .shop h1::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 3px;
+    background-color: #cc8f0c;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: animate 4s linear infinite;
+  }
+  .shop .top-content {
+    background-color: #cc8f0c;
+    width: 90%;
+    margin: 0 auto 20px auto;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px white;
+  }
+  
+  .itemcenter {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+  
+  .shop h3 {
+    height: 100%;
+    background-color: beige;
+    line-height: 60px;
+    padding: 0 50px;
+    color: #cc8f0c;
+  }
+  
+  .shop label {
+    display: inline-block;
+    height: 100%;
+    padding: 0 90px;
+    margin: 0 50px;
+    line-height: 60px;
+    color: wheat;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.5s;
+  }
+  
+  .shop label:hover {
+    color: black;
+  }
+  .shop label a:visited {
+    color: coral;
+  }
+  
+  .shop .photo-gallery {
+    width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+    cursor: pointer;
+  }
+  
+  .shop .pic {
+    position: relative;
+    height: 300px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 4px lightslategray;
+    cursor: pointer;
+  }
+  
+  .shop .pic img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    transition: 0.5s;
+  }
+  .shop .pic::before {
+    content: 'LuzViMin Styles';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: aliceblue;
+    font-size: 25px;
+    font-weight: bold;
+    width: 100%;
+    margin-top: -100px;
+    opacity: 0.5;
+    transition: 0.3s;
+    transition-delay: 0.2s;
+    z-index: 1;
+  }
+  
+  .shop .pic:after {
+    content: ' ';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 10px;
+    height: 0;
+    background-color: rgb(0, 0, 0, 0.4);
+    transition: 0.3s;
+  }
+  
+  .shop .pic:hover::after {
+    height: 100%;
+  }
+  
+  .shop .pic:hover::before {
+    margin-top: 0;
+    opacity: 1;
+  }
+  
+  #check1:checked ~ .container .photo-gallery .pic {
+    opacity: 1;
+    transform: scale(1);
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  #check2:checked ~ .container .photo-gallery .gown {
+    opacity: 1;
+    transform: scale(1);
+    position: relative;
+  }
+  #check2:checked ~ .container .photo-gallery .suit {
+    opacity: 0;
+    transform: scale(0);
+    position: absolute;
+    transition: 0s;
+  }
+  
+  #check3:checked ~ .container .photo-gallery .suit {
+    opacity: 1;
+    transform: scale(1);
+    position: relative;
+  }
+  #check3:checked ~ .container .photo-gallery .gown {
+    opacity: 0;
+    transform: scale(0);
+    position: absolute;
+    transition: 0s;
+  }
+  /*Jhaz gallery for nav bar*/
+  .top-content label {
+    color: white;
+  }
+  
+  .top-content label.active {
+    /* style for selected labels */
+    color: black; /* or your desired color */
+  }
+  
+  /*Miscellaneous*/
+  .mission,
+  .benefits,
+  h3 {
+    color: #cc8f0c;
+    font-size: 23px;
+  }
+
+
+  
+
+  
