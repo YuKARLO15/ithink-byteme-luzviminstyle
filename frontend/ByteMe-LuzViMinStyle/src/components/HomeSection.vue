@@ -11,7 +11,7 @@
         <a href="#" style="--i: 7"><i class="bx bxl-instagram"></i></a>
         <a href="#" style="--i: 8"><i class="bx bx-envelope"></i></a>
       </div>
-      <a href="#" class="button">Log In </a>
+      <RouterLink to="/login" class="button">Log In</RouterLink>
     </div>
     <div>
       <div class="col">

@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <RouterLink to="/" class="logo"
+    <RouterLink :to="{ path: '/', hash: '#section1' }" class="logo"
       ><img src="../assets/LuzViMinLogo.png" alt="LuzViMin logo" width="150px" height="auto"
     /></RouterLink>
     <nav class="navbar">
