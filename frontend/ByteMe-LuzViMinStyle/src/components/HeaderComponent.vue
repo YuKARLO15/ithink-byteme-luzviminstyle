@@ -1,12 +1,18 @@
 <template>
   <header class="header">
-    <a href="#" class="logo"
+    <RouterLink to="/" class="logo"
       ><img src="../assets/LuzViMinLogo.png" alt="LuzViMin logo" width="150px" height="auto"
-    /></a>
+    /></RouterLink>
     <nav class="navbar">
-      <RouterLink to="{ name: 'home', hash: '#section1' }" style="--i: 1" class="nav-link">Home</RouterLink>
-      <a href="#section2" style="--i: 2" class="nav-link">About Us</a>
-      <a href="#section3" style="--i: 3" class="nav-link">Shop</a>
+      <RouterLink :to="{ path: '/', hash: '#section1' }" style="--i: 1" class="nav-link"
+        >Home</RouterLink
+      >
+      <RouterLink :to="{ path: '/', hash: '#section2' }" style="--i: 2" class="nav-link"
+        >About Us</RouterLink
+      >
+      <RouterLink :to="{ path: '/', hash: '#section3' }" style="--i: 3" class="nav-link"
+        >Shop</RouterLink
+      >
       <a href="#" style="--i: 4" class="hovercart"><i class="fa-solid fa-cart-shopping"></i></a>
       <!-- <a href="#" style="--i:4;" class="hovercart"><img src = "" ></a> -->
       <RouterLink to="/signup" style="--i: 5" class="nav-link"><strong>Sign Up</strong></RouterLink>
@@ -15,7 +21,7 @@
 </template>
 
 <script>
-import { RouterLink } from 'vue-router';
+import { RouterLink } from 'vue-router'
 
 export default {
   name: 'HeaderComponent'
