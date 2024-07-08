@@ -14,8 +14,10 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       rel="stylesheet"
     />
+
   </head>
   <body>
+
     <header class="header">
       <a href="#" class="logo"
         ><img
@@ -40,29 +42,35 @@
         >
       </nav>
     </header>
+
     <div class="loginform">
-      <form action="/login" method="post">
+      <form action="login" method="post" id = "LoginForm">
         <div class="username">
           <h4 class = "h4_class">Welcome to <span>LuzViMin</span></h4>
-          <label for="uname"><b>Username</b></label>
+          <label for="username"><b>Username</b></label>
           <input
             type="text"
             placeholder="Enter Username"
-            name="uname"
+            name="username"
             required
           />
+
         </div>
         <div class="pass">
-          <label for="psw"><b>Password</b></label>
+          <label for="password"><b>Password</b></label>
           <input
             type="password"
             placeholder="Enter Password"
-            name="psw"
+            name="password"
             required
           />
+
         </div>
         <div class="btnlogin">
-          <button type="submit">Login</button>
+          <button type="submit" id = "LogIn" >Login</button>
+
+
+          
         </div>
         <div class="check_box">
           <label>
@@ -76,10 +84,65 @@
         </div>
 
         <div class="forgot">
-          <span class="psw"><a href="#">Forgot password?</a></span>
+          <span class="password"><a href="#">Forgot password?</a></span>
         </div>
+
       </form>
     </div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+      import { getDatabase, ref, child, get } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
+    
+      const firebaseConfig = {
+        apiKey: "AIzaSyCQT-w4iKv3MuivCPdtB6LYHWlm9IucJKI",
+        authDomain: "luzvimin-4a51e.firebaseapp.com",
+        databaseURL: "https://luzvimin-4a51e-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "luzvimin-4a51e",
+        storageBucket: "luzvimin-4a51e.appspot.com",
+        messagingSenderId: "137799781399",
+        appId: "1:137799781399:web:2010b8cafe6b06453ae052",
+        measurementId: "G-MKJT7NXH71"
+      };
+    
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+    
+      const loginForm = document.getElementById('LoginForm');
+    
+      loginForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
+    
+        const username = loginForm.username.value;
+        const password = loginForm.password.value;
+    
+        try {
+          // Check if the username exists in the database
+          const userSnapshot = await get(child(ref(db), `users/${username}`));
+          if (userSnapshot.exists()) {
+            const userData = userSnapshot.val();
+    
+            // Check if the entered password matches the stored password
+            if (password === userData.password) {
+              alert('Login successful!');
+              window.location.href = 'index.html'; // Redirect to landing page
+            } else {
+              alert('Incorrect password. Please try again.');
+            }
+          } else {
+            alert('Username not found. Please check your username.');
+          }
+        } catch (error) {
+          console.error('Error logging in:', error);
+          alert('Login failed. Please try again later.');
+        }
+      });
+    </script>
+
+
+
+
+
 
     <footer class="footer">
       <div class="footer-container">

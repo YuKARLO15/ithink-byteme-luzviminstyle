@@ -14,8 +14,12 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       rel="stylesheet"
     />
+
+
   </head>
+
   <body>
+
     <header class="header">
       <a href="#" class="logo"
         ><img
@@ -36,93 +40,149 @@
         <a href="#" style="--i: 4" class="hovercart"><img src="" /></a>
         
       </nav>
+
     </header>
+
     <div class="signup-form">
+
       <h2>Sign Up LuzViMin</h2>
-      <form action="#" method="post">
+
+      <form action="" id = "UserInformation">
+  
         <div class="form-group">
-          <label for="what-they-want">What do you want?</label>
-          <select id="what-they-want" name="what-they-want" required>
-            <option value="">Select an option</option>
-            <option value="Register for an account">
-              Register for an account
-            </option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="username">Username</label>
+          <label for="EnterUsername">Username</label>
           <input
             type="text"
-            id="username"
-            name="username"
+            id="EnterUsername"
             placeholder="Enter your username"
             required
           />
         </div>
+
         <div class="form-group">
-          <label for="password">Password</label>
+          <label for="EnterPassword">Password</label>
           <input
             type="password"
-            id="password"
-            name="password"
+            id="EnterPassword"
             placeholder="Enter your password"
             required
           />
         </div>
+
         <div class="form-group">
-          <label for="lastname">Last Name</label>
+          <label for="EnterFullName">Full Name</label>
           <input
             type="text"
-            id="lastname"
-            name="lastname"
-            placeholder="Enter your last name"
+            id="EnterFullName"
+            placeholder="Enter your full name"
             required
           />
         </div>
+
         <div class="form-group">
-          <label for="firstname">First Name</label>
-          <input
-            type="text"
-            id="firstname"
-            name="firstname"
-            placeholder="Enter your first name"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="age">Age</label>
+          <label for="EnterAge">Age</label>
           <input
             type="number"
-            id="age"
-            name="age"
+            id="EnterAge"
             placeholder="Enter your age"
             required
           />
         </div>
+
         <div class="form-group">
-          <label for="email">Email</label>
+          <label for="EnterEmail">Email</label>
           <input
             type="email"
-            id="email"
-            name="email"
+            id="EnterEmail"
             placeholder="Enter your email address"
             required
           />
         </div>
+        
         <div class="form-group">
-          <label for="address">Address</label>
+          <label for="EnterAddress">Address</label>
           <input
             type="address"
-            id="address"
-            name="address"
+            id="EnterAddress"
             placeholder="Enter your address"
             required
-          ></input>
+          />
         </div>
-        <button type="submit">Sign Up</button>
+
+        <button type="submit" id = "SignUp">Sign Up</button>
+
       </form>
     </div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+      import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
+    
+      const firebaseConfig = {
+        apiKey: "AIzaSyCQT-w4iKv3MuivCPdtB6LYHWlm9IucJKI",
+        authDomain: "luzvimin-4a51e.firebaseapp.com",
+        databaseURL: "https://luzvimin-4a51e-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "luzvimin-4a51e",
+        storageBucket: "luzvimin-4a51e.appspot.com",
+        messagingSenderId: "137799781399",
+        appId: "1:137799781399:web:2010b8cafe6b06453ae052",
+        measurementId: "G-MKJT7NXH71"
+      };
+    
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+    
+      document.getElementById('SignUp').addEventListener('click', function(e) {
+        e.preventDefault();
+    
+        // Validate all form fields are filled
+        const username = document.getElementById("EnterUsername").value;
+        const password = document.getElementById("EnterPassword").value;
+        const fullName = document.getElementById("EnterFullName").value;
+        const age = document.getElementById("EnterAge").value;
+        const email = document.getElementById("EnterEmail").value;
+        const address = document.getElementById("EnterAddress").value;
+    
+        if (!username || !password || !fullName || !age || !email || !address) {
+          alert("Please fill out all fields.");
+          return;
+        }
+    
+  
+        const userRef = ref(db, 'users/' + username);
+        get(userRef)
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              alert("Username already exists. Please choose a different username.");
+            } else {
+        
+              const userInformation = {
+                username: username,
+                password: password,
+                fullName: fullName,
+                age: age,
+                email: email,
+                address: address,
+              };
+    
+              set(ref(db, 'users/' + username), userInformation)
+                .then(() => {
+                  alert("Signup Successful!");
+                  document.getElementById("UserInformation").reset();
+                  window.location.href = "index.html";
+                })
+                .catch((error) => {
+                  console.error("Error adding document: ", error);
+                  alert("Signup Failed. Please try again later.");
+                });
+            }
+          })
+          .catch((error) => {
+            console.error("Error checking username:", error);
+            alert("An error occurred. Please try again later.");
+          });
+      });
+    </script>
 
     <footer class="footer">
       <div class="footer-container">
@@ -165,3 +225,8 @@
     </footer>
   </body>
 </html>
+
+
+
+
+
