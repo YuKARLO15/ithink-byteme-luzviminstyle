@@ -166,6 +166,10 @@ body {
   margin-bottom: 20px;
 }
 
+.h2_class span{
+  color: #cb8d09;
+}
+
 .form-group {
   margin-bottom: 15px;
 }
