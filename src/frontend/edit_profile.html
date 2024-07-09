@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Sign Up</title>
+    <title>Edit Profile</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="images/logo3.png" type="image/x-icon" />
-    <link rel="stylesheet" href="signup.css" />
+    <link rel="stylesheet" href="edit_profile.css" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
@@ -14,12 +14,9 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       rel="stylesheet"
     />
-
-
   </head>
 
   <body>
-
     <header class="header">
       <a href="#" class="logo"
         ><img
@@ -31,18 +28,16 @@
 
       <nav class="navbar">
         <a href="index.html#section1" style="--i: 1" class="nav-link">Home</a>
-        <a href="index.html#section2" style="--i: 2" class="nav-link">About Us</a>
-        <a href="login.html" style="--i: 3" class="nav-link">Sign In</a>
+        <a href="dashboard_login.html" style="--i: 2" class="nav-link"
+          >Dashboard</a
+        >
       </nav>
-
     </header>
 
     <div class="signup-form">
+      <h2>Edit Profile</h2>
 
-      <h2>Sign Up LuzViMin</h2>
-
-      <form action="" id = "UserInformation">
-  
+      <form action="" id="UserInformation">
         <div class="form-group">
           <label for="EnterUsername">Username</label>
           <input
@@ -92,7 +87,7 @@
             required
           />
         </div>
-        
+
         <div class="form-group">
           <label for="EnterAddress">Address</label>
           <input
@@ -103,32 +98,37 @@
           />
         </div>
 
-        <button type="submit" id = "SignUp">Sign Up</button>
-
+        <button type="submit" id="SignUp">Save Changes</button>
       </form>
     </div>
 
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
-      import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
-    
+      import {
+        getDatabase,
+        ref,
+        set,
+        get,
+      } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
+
       const firebaseConfig = {
         apiKey: "AIzaSyCQT-w4iKv3MuivCPdtB6LYHWlm9IucJKI",
         authDomain: "luzvimin-4a51e.firebaseapp.com",
-        databaseURL: "https://luzvimin-4a51e-default-rtdb.asia-southeast1.firebasedatabase.app",
+        databaseURL:
+          "https://luzvimin-4a51e-default-rtdb.asia-southeast1.firebasedatabase.app",
         projectId: "luzvimin-4a51e",
         storageBucket: "luzvimin-4a51e.appspot.com",
         messagingSenderId: "137799781399",
         appId: "1:137799781399:web:2010b8cafe6b06453ae052",
-        measurementId: "G-MKJT7NXH71"
+        measurementId: "G-MKJT7NXH71",
       };
-    
+
       const app = initializeApp(firebaseConfig);
       const db = getDatabase(app);
-    
-      document.getElementById('SignUp').addEventListener('click', function(e) {
+
+      document.getElementById("SignUp").addEventListener("click", function (e) {
         e.preventDefault();
-    
+
         // Validate all form fields are filled
         const username = document.getElementById("EnterUsername").value;
         const password = document.getElementById("EnterPassword").value;
@@ -136,20 +136,20 @@
         const age = document.getElementById("EnterAge").value;
         const email = document.getElementById("EnterEmail").value;
         const address = document.getElementById("EnterAddress").value;
-    
+
         if (!username || !password || !fullName || !age || !email || !address) {
           alert("Please fill out all fields.");
           return;
         }
-    
-  
-        const userRef = ref(db, 'users/' + username);
+
+        const userRef = ref(db, "users/" + username);
         get(userRef)
           .then((snapshot) => {
             if (snapshot.exists()) {
-              alert("Username already exists. Please choose a different username.");
+              alert(
+                "Username already exists. Please choose a different username."
+              );
             } else {
-        
               const userInformation = {
                 username: username,
                 password: password,
@@ -158,8 +158,8 @@
                 email: email,
                 address: address,
               };
-    
-              set(ref(db, 'users/' + username), userInformation)
+
+              set(ref(db, "users/" + username), userInformation)
                 .then(() => {
                   alert("Signup Successful!");
                   document.getElementById("UserInformation").reset();
@@ -219,8 +219,3 @@
     </footer>
   </body>
 </html>
-
-
-
-
-
