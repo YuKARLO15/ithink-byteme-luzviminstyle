@@ -1,89 +1,122 @@
 <template>
   <div class="signup-form">
-    <h2>Sign Up LuzViMin</h2>
-    <form action="#" method="post">
+    <h2 class="h2_class">Sign Up <span>LuzViMin</span></h2>
+
+    <form @submit.prevent="signUp" id="UserInformation">
       <div class="form-group">
-        <label for="what-they-want">What do you want?</label>
-        <select id="what-they-want" name="what-they-want" required>
-          <option value="">Select an option</option>
-          <option value="Register for an account">Register for an account</option>
-          <option value="Sign up for updates">Sign up for updates</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="username">Username</label>
+        <label for="EnterUsername">Username</label>
         <input
           type="text"
-          id="username"
-          name="username"
+          v-model="user.username"
+          id="EnterUsername"
           placeholder="Enter your username"
           required
         />
       </div>
+
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="EnterPassword">Password</label>
         <input
           type="password"
-          id="password"
-          name="password"
+          v-model="user.password"
+          id="EnterPassword"
           placeholder="Enter your password"
           required
         />
       </div>
+
       <div class="form-group">
-        <label for="lastname">Last Name</label>
+        <label for="EnterFullName">Full Name</label>
         <input
           type="text"
-          id="lastname"
-          name="lastname"
-          placeholder="Enter your last name"
+          v-model="user.fullName"
+          id="EnterFullName"
+          placeholder="Enter your full name"
           required
         />
       </div>
+
       <div class="form-group">
-        <label for="firstname">First Name</label>
+        <label for="EnterAge">Age</label>
         <input
-          type="text"
-          id="firstname"
-          name="firstname"
-          placeholder="Enter your first name"
+          type="number"
+          v-model="user.age"
+          id="EnterAge"
+          placeholder="Enter your age"
           required
         />
       </div>
+
       <div class="form-group">
-        <label for="age">Age</label>
-        <input type="number" id="age" name="age" placeholder="Enter your age" required />
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
+        <label for="EnterEmail">Email</label>
         <input
           type="email"
-          id="email"
-          name="email"
+          v-model="user.email"
+          id="EnterEmail"
           placeholder="Enter your email address"
           required
         />
       </div>
+
       <div class="form-group">
-        <label for="address">Address</label>
+        <label for="EnterAddress">Address</label>
         <input
-          type="address"
-          id="address"
-          name="address"
+          type="text"
+          v-model="user.address"
+          id="EnterAddress"
           placeholder="Enter your address"
           required
         />
       </div>
-      <button type="submit">Sign Up</button>
+
+      <button type="submit" id="SignUp">Sign Up</button>
     </form>
   </div>
 </template>
 
 <script>
+import { ref, set, get, getDatabase } from 'firebase/database'
+
 export default {
-  name: 'SignupComponent'
-  // Your component logic goes here
+  name: 'SignupComponent',
+  data() {
+    return {
+      user: {
+        username: '',
+        password: '',
+        fullName: '',
+        age: '',
+        email: '',
+        address: ''
+      }
+    }
+  },
+  methods: {
+    signUp() {
+      const db = getDatabase()
+      const userRef = ref(db, 'users/' + this.user.username)
+      get(userRef)
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            alert('Username already exists. Please choose a different username.')
+          } else {
+            set(ref(db, 'users/' + this.user.username), this.user)
+              .then(() => {
+                alert('Signup Successful!')
+                this.$router.push('/')
+              })
+              .catch((error) => {
+                console.error('Error adding document: ', error)
+                alert('Signup Failed. Please try again later.')
+              })
+          }
+        })
+        .catch((error) => {
+          console.error('Error checking username:', error)
+          alert('An error occurred. Please try again later.')
+        })
+    }
+  }
 }
 </script>
 
@@ -102,6 +135,10 @@ export default {
 .signup-form h2 {
   text-align: center;
   margin-bottom: 20px;
+}
+
+.h2_class span {
+  color: #cb8d09;
 }
 
 .form-group {
@@ -133,8 +170,9 @@ export default {
 }
 
 button[type='submit'] {
-  width: 100%;
+  width: 30%;
   padding: 10px;
+  margin-left: 480px;
   background-color: #a87812;
   color: white;
   border: none;

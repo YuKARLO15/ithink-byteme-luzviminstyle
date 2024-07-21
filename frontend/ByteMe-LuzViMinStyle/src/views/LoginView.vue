@@ -1,4 +1,9 @@
+<script setup>
+import HeaderComponent from '../components/HeaderComponent.vue'
+</script>
+
 <template>
+  <HeaderComponent />
   <div class="loginform">
     <form @submit.prevent="login">
       <div class="username">
