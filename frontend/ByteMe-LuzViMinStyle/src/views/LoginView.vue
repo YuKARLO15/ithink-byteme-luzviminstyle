@@ -1,19 +1,31 @@
 <template>
   <div class="loginform">
-    <form action="login" method="post" id="LoginForm">
+    <form @submit.prevent="login">
       <div class="username">
         <h4 class="h4_class">Welcome to <span>LuzViMin</span></h4>
         <label for="username"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="username" required />
+        <input
+          v-model="username"
+          type="text"
+          placeholder="Enter Username"
+          name="username"
+          required
+        />
       </div>
       <div class="pass">
         <label for="password"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" required />
+        <input
+          v-model="password"
+          type="password"
+          placeholder="Enter Password"
+          name="password"
+          required
+        />
       </div>
 
       <div class="check_box">
         <label class="remember">
-          <input type="checkbox" checked="checked" name="remember" />
+          <input type="checkbox" v-model="remember" checked="checked" name="remember" />
           Remember me
         </label>
       </div>
@@ -29,17 +41,36 @@
 </template>
 
 <script>
+import { ref, child, get } from 'firebase/database'
+import { db } from '@/firebase/firebaseInit' // Adjust the path as necessary
+
 export default {
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      remember: false
     }
   },
   methods: {
-    login() {
-      // Add your login logic here
-      // You can access the entered username and password using this.username and this.password
+    async login() {
+      try {
+        const userSnapshot = await get(child(ref(db), `users/${this.username}`))
+        if (userSnapshot.exists()) {
+          const userData = userSnapshot.val()
+          if (this.password === userData.password) {
+            alert('Login successful!')
+            this.$router.push({ path: '/' }) // Use Vue Router for navigation
+          } else {
+            alert('Incorrect password. Please try again.')
+          }
+        } else {
+          alert('Username not found. Please check your username.')
+        }
+      } catch (error) {
+        console.error('Error logging in:', error)
+        alert('Login failed. Please try again later.')
+      }
     }
   }
 }
