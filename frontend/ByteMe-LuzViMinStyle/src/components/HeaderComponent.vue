@@ -10,12 +10,8 @@
       <RouterLink :to="{ path: '/', hash: '#section2' }" style="--i: 2" class="nav-link"
         >About Us</RouterLink
       >
-      <RouterLink :to="{ path: '/', hash: '#section3' }" style="--i: 3" class="nav-link"
-        >Shop</RouterLink
-      >
-      <a href="#" style="--i: 4" class="hovercart"><i class="fa-solid fa-cart-shopping"></i></a>
       <!-- <a href="#" style="--i:4;" class="hovercart"><img src = "" ></a> -->
-      <RouterLink to="/signup" style="--i: 5" class="nav-link"><strong>Sign Up</strong></RouterLink>
+      <RouterLink to="/signup" style="--i: 3" class="nav-link"><strong>Sign Up</strong></RouterLink>
     </nav>
   </header>
 </template>

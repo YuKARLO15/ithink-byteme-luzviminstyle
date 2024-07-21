@@ -1,31 +1,28 @@
 <template>
   <div class="loginform">
-    <form action="/login" method="post">
+    <form action="login" method="post" id="LoginForm">
       <div class="username">
         <h4 class="h4_class">Welcome to <span>LuzViMin</span></h4>
-        <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required />
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="username" required />
       </div>
       <div class="pass">
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required />
+        <label for="password"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" required />
       </div>
-      <div class="btnlogin">
-        <button type="submit">Login</button>
-      </div>
+
       <div class="check_box">
-        <label>
+        <label class="remember">
           <input type="checkbox" checked="checked" name="remember" />
           Remember me
         </label>
       </div>
-
-      <div class="cancel">
-        <button type="button" class="cancelbtn">Cancel</button>
+      <div class="btnlogin">
+        <button type="submit" id="LogIn">Login</button>
       </div>
 
       <div class="forgot">
-        <span class="psw"><a href="#">Forgot password?</a></span>
+        <span class="password" padd><a href="#">Forgot password?</a></span>
       </div>
     </form>
   </div>
@@ -62,12 +59,13 @@ export default {
 .username {
   padding: 16px;
   background-color: #ffffff;
-  margin-top: 250px;
+  margin-top: 5px;
 }
 .pass {
   padding: 16px;
   background-color: #ffffff;
   padding-left: 20px;
+  padding-bottom: 5px;
 }
 .loginform {
   padding: 20px;
@@ -87,17 +85,23 @@ export default {
 
 /* Style for form labels */
 label {
-  font-weight: bold;
+  font-weight: normal;
   padding-left: 600px;
   padding-right: 40px;
 }
 
 .check_box {
   font-weight: bold;
+  font-size: 14px;
   padding-left: 80px;
   padding-right: 40px;
   padding-top: 10px;
   padding-bottom: 20px;
+  padding-top: 1px;
+}
+
+.remember {
+  padding-left: 666px;
 }
 /* Style for form inputs */
 input[type='text'] {
@@ -150,6 +154,7 @@ button[type='submit']:hover {
 
 .h4_class span {
   color: #cb8d09;
+  padding-top: 10px;
 }
 .psw {
   float: left;
@@ -171,6 +176,12 @@ button[type='submit']:hover {
 
 .cancel {
   padding-left: 560px;
+}
+
+.forgot {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1px;
 }
 
 /* Add padding to the password link */
