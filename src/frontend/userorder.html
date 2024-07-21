@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Orders</title>
+    <link rel="stylesheet" href="userorder.css">
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="logo">
+            <img src="images/logo3.png" alt="LuzViMin logo" width="150px" height="auto" />
+        </a>
+        <nav class="navbar">
+            <a href="shop.html" style="--i: 1" class="nav-link">Shop</a>
+        </nav>
+    </header>
+
+    <div id="orders-container" class="orders-container"></div>
+
+
+
+    <!-- Your custom script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
+        
+        // Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCQT-w4iKv3MuivCPdtB6LYHWlm9IucJKI",
+          authDomain: "luzvimin-4a51e.firebaseapp.com",
+          databaseURL: "https://luzvimin-4a51e-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "luzvimin-4a51e",
+          storageBucket: "luzvimin-4a51e.appspot.com",
+          messagingSenderId: "137799781399",
+          appId: "1:137799781399:web:2010b8cafe6b06453ae052",
+          measurementId: "G-MKJT7NXH71"
+        };
+        
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        window.onload = async function() {
+          const username = localStorage.getItem('loggedInUser'); // Get the username from localStorage
+          if (!username) {
+            alert('No logged in user found.');
+            return;
+          }
+
+          const ordersContainer = document.getElementById('orders-container');
+
+          // Reference to the user's orders in Firebase
+          const userOrdersRef = ref(db, `rentorders/${username}`);
+          
+          try {
+            const snapshot = await get(userOrdersRef);
+            if (snapshot.exists()) {
+              const orders = snapshot.val();
+              ordersContainer.innerHTML = ''; // Clear any existing content
+
+              // Iterate over each order and display it
+              for (const orderId in orders) {
+                if (orders.hasOwnProperty(orderId)) {
+                  const order = orders[orderId];
+                  const orderElement = document.createElement('div');
+                  orderElement.classList.add('order');
+                  orderElement.innerHTML = `
+                    <h3>Order ID: ${order.orderId}</h3>
+                    <p>Item Name: ${order.itemName}</p>
+                    <p>Hours: ${order.hours}</p>
+                    <p>Total Cost: ₱${order.totalCost}</p>
+                    <p>Payment Mode: ${order.paymentMode}</p>
+                    <p>Sender Name: ${order.senderName}</p>
+                  `;
+                  ordersContainer.appendChild(orderElement);
+                }
+              }
+            } else {
+              ordersContainer.innerHTML = '<p>No orders found.</p>';
+            }
+          } catch (error) {
+            console.error('Error fetching user orders:', error);
+            ordersContainer.innerHTML = '<p>Error fetching orders. Please try again later.</p>';
+          }
+        };
+    </script>
+</body>
+</html>

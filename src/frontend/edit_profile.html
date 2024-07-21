@@ -27,11 +27,11 @@
       /></a>
 
       <nav class="navbar">
-        <a href="index.html#section1" style="--i: 1" class="nav-link">Home</a>
-        <a href="dashboard_login.html" style="--i: 2" class="nav-link"
-          >Dashboard</a
-        >
+        <a href="shop.html" style="--i: 4" class="hovercart"
+        ><i class="fa-solid fa-left-long"></i></a>
       </nav>
+
+    
     </header>
 
     <div class="signup-form">
@@ -104,79 +104,83 @@
 
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
-      import {
-        getDatabase,
-        ref,
-        set,
-        get,
-      } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
+      import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
 
       const firebaseConfig = {
-        apiKey: "AIzaSyCQT-w4iKv3MuivCPdtB6LYHWlm9IucJKI",
-        authDomain: "luzvimin-4a51e.firebaseapp.com",
-        databaseURL:
-          "https://luzvimin-4a51e-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "luzvimin-4a51e",
-        storageBucket: "luzvimin-4a51e.appspot.com",
-        messagingSenderId: "137799781399",
-        appId: "1:137799781399:web:2010b8cafe6b06453ae052",
-        measurementId: "G-MKJT7NXH71",
+          apiKey: "AIzaSyCQT-w4iKv3MuivCPdtB6LYHWlm9IucJKI",
+          authDomain: "luzvimin-4a51e.firebaseapp.com",
+          databaseURL: "https://luzvimin-4a51e-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "luzvimin-4a51e",
+          storageBucket: "luzvimin-4a51e.appspot.com",
+          messagingSenderId: "137799781399",
+          appId: "1:137799781399:web:2010b8cafe6b06453ae052",
+          measurementId: "G-MKJT7NXH71"
       };
 
       const app = initializeApp(firebaseConfig);
       const db = getDatabase(app);
 
-      document.getElementById("SignUp").addEventListener("click", function (e) {
-        e.preventDefault();
+      window.addEventListener("load", async function() {
+          const loggedInUser = localStorage.getItem('loggedInUser');
+          if (!loggedInUser) {
+              alert("No user logged in");
+              window.location.href = "login.html";
+              return;
+          }
 
-        // Validate all form fields are filled
-        const username = document.getElementById("EnterUsername").value;
-        const password = document.getElementById("EnterPassword").value;
-        const fullName = document.getElementById("EnterFullName").value;
-        const age = document.getElementById("EnterAge").value;
-        const email = document.getElementById("EnterEmail").value;
-        const address = document.getElementById("EnterAddress").value;
-
-        if (!username || !password || !fullName || !age || !email || !address) {
-          alert("Please fill out all fields.");
-          return;
-        }
-
-        const userRef = ref(db, "users/" + username);
-        get(userRef)
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              alert(
-                "Username already exists. Please choose a different username."
-              );
-            } else {
-              const userInformation = {
-                username: username,
-                password: password,
-                fullName: fullName,
-                age: age,
-                email: email,
-                address: address,
-              };
-
-              set(ref(db, "users/" + username), userInformation)
-                .then(() => {
-                  alert("Signup Successful!");
-                  document.getElementById("UserInformation").reset();
-                  window.location.href = "index.html";
-                })
-                .catch((error) => {
-                  console.error("Error adding document: ", error);
-                  alert("Signup Failed. Please try again later.");
-                });
-            }
-          })
-          .catch((error) => {
-            console.error("Error checking username:", error);
-            alert("An error occurred. Please try again later.");
-          });
+          try {
+              const userRef = ref(db, "users/" + loggedInUser);
+              const snapshot = await get(userRef);
+              if (snapshot.exists()) {
+                  const userData = snapshot.val();
+                  document.getElementById("EnterUsername").value = userData.username;
+                  document.getElementById("EnterPassword").value = userData.password;
+                  document.getElementById("EnterFullName").value = userData.fullName;
+                  document.getElementById("EnterAge").value = userData.age;
+                  document.getElementById("EnterEmail").value = userData.email;
+                  document.getElementById("EnterAddress").value = userData.address;
+              } else {
+                  alert("User data not found");
+              }
+          } catch (error) {
+              console.error("Error retrieving user data:", error);
+              alert("Failed to load user data");
+          }
       });
-    </script>
+
+      document.getElementById("SignUp").addEventListener("click", async function(e) {
+          e.preventDefault();
+
+          const username = document.getElementById("EnterUsername").value;
+          const password = document.getElementById("EnterPassword").value;
+          const fullName = document.getElementById("EnterFullName").value;
+          const age = document.getElementById("EnterAge").value;
+          const email = document.getElementById("EnterEmail").value;
+          const address = document.getElementById("EnterAddress").value;
+
+          if (!username || !password || !fullName || !age || !email || !address) {
+              alert("Please fill out all fields.");
+              return;
+          }
+
+          const userInformation = {
+              username: username,
+              password: password,
+              fullName: fullName,
+              age: age,
+              email: email,
+              address: address
+          };
+
+          try {
+              await set(ref(db, "users/" + username), userInformation);
+              alert("Profile updated successfully!");
+          } catch (error) {
+              console.error("Error updating profile:", error);
+              alert("Failed to update profile. Please try again later.");
+          }
+      });
+  </script>
 
     <footer class="footer">
       <div class="footer-container">

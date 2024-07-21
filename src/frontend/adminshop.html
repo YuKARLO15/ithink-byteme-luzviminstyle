@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="images/logo3.png" type="image/x-icon" />
-    <link rel="stylesheet" href="shop.css" />
+    <link rel="stylesheet" href="adminshop.css" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
@@ -17,31 +17,28 @@
   </head>
   <body>
     <header class="header">
-      <a href="#" class="logo"
-        ><img
-          src="images/logo3.png"
-          alt="LuzViMin logo"
-          width="150px"
-          height="auto"
-      /></a>
+      <a href="#" class="logo">
+        <img src="images/logo3.png" alt="LuzViMin logo" width="150px" height="auto" />
+      </a>
       <nav class="navbar">
-        <a href="message.html" style="--i: 4" class="hovercart"
-          ><i class="fa-solid fa-message"></i
-        ></a>
-        <a href="userorder.html" style="--i: 4" class="hovercart"
-          ><i class="fa-solid fa-cart-shopping"></i
-        ></a>
-        <div class="dropdown">
-          <details>
-            <summary>
-              <i class="fa-solid fa-user" style="cursor: pointer"></i>
-            </summary>
-            <div class="dropdown-menu">
-              <a href="edit_profile.html">View Profile</a>
-              <a href="index.html">Log Out</a>
-            </div>
-          </details>
-        </div>
+
+        <a href="adminmessage.html" style="--i: 4" class="hovercart">
+          <i class="fa-solid fa-message"></i>
+        </a>
+        <a href="adminorders.html" style="--i: 4" class="hovercart"
+        ><i class="fa-solid fa-cart-shopping"></i
+      ></a>
+      <div class="dropdown">
+        <details>
+          <summary>
+            <i class="fa-solid fa-user" style="cursor: pointer"></i>
+          </summary>
+          <div class="dropdown-menu">
+            <a href="index.html">Log Out</a>
+          </div>
+        </details>
+      </div>
+
       </nav>
     </header>
 
@@ -68,161 +65,140 @@
           <div class="pic gown" data-name="Luna Luster">
             <img src="images/gown1.jpeg" />
             <figcaption>Luna Luster</figcaption>
-            <button class="rent">Rent</button>
-            <button class="buy">Buy</button>
-            <p class="status" style="display: none;">Unavailable</p> <!-- Status message -->
+            <button class="add-quantity" onclick="location.href='adminquantity.html?item=Luna%20Luster'">Add Quantity</button>
+            <p class="status">Unavailable</p>
           </div>
           <div class="pic suit" data-name="Lakandula Suit">
             <img src="images/suit11.jpg" />
             <figcaption>Lakandula Suit</figcaption>
-            <button class="rent">Rent</button>
-            <button class="buy">Buy</button>
-            <p class="status" style="display: none;">Unavailable</p> <!-- Status message -->
+            <button class="add-quantity" onclick="location.href='adminquantity.html?item=Lakandula%20Suit'">Add Quantity</button>
+            <p class="status">Unavailable</p>
           </div>
           <div class="pic gown" data-name="Maria Clara Gown">
             <img src="images/gown1.jpg" />
             <figcaption>Maria Clara Gown</figcaption>
-            <button class="rent">Rent</button>
-            <button class="buy">Buy</button>
-            <p class="status" style="display: none;">Unavailable</p> <!-- Status message -->
+            <button class="add-quantity" onclick="location.href='adminquantity.html?item=Maria%20Clara%20Gown'">Add Quantity</button>
+            <p class="status">Unavailable</p>
           </div>
           <div class="pic suit" data-name="Bayani Blazer">
             <img src="images/suit2.jpg" />
             <figcaption>Bayani Blazer</figcaption>
-            <button class="rent">Rent</button>
-            <button class="buy">Buy</button>
-            <p class="status" style="display: none;">Unavailable</p> <!-- Status message -->
+            <button class="add-quantity" onclick="location.href='adminquantity.html?item=Bayani%20Blazer'">Add Quantity</button>
+            <p class="status">Unavailable</p>
           </div>
+
           <!--2nd row-->
           <div class="pic suit" data-name="Bagani Wear">
             <img src="images/suit4.jpg" />
             <figcaption>Bagani Wear</figcaption>
-            <button class="rent">Rent</button>
-            <button class="buy">Buy</button>
-            <p class="status" style="display: none;">Unavailable</p> <!-- Status message -->
+            <button class="add-quantity" onclick="location.href='adminquantity.html?item=Bagani%20Wear'">Add Quantity</button>
+            <p class="status">Unavailable</p>
           </div>
           <div class="pic gown" data-name="Hiraya Harmony">
             <img src="images/gown3.jpg" />
             <figcaption>Hiraya Harmony</figcaption>
-            <button class="rent">Rent</button>
-            <button class="buy">Buy</button>
-            <p class="status" style="display: none;">Unavailable</p> <!-- Status message -->
+            <button class="add-quantity" onclick="location.href='adminquantity.html?item=Hiraya%20Harmony'">Add Quantity</button>
+            <p class="status">Unavailable</p>
           </div>
           <div class="pic suit" data-name="Yakap ng Kultura">
             <img src="images/suit5.jpg" />
             <figcaption>Yakap ng Kultura</figcaption>
-            <button class="rent">Rent</button>
-            <button class="buy">Buy</button>
-            <p class="status" style="display: none;">Unavailable</p> <!-- Status message -->
+            <button class="add-quantity" onclick="location.href='adminquantity.html?item=Yakap%20ng%20Kultura'">Add Quantity</button>
+            <p class="status">Unavailable</p>
           </div>
           <div class="pic gown" data-name="Maharlika Majesty">
             <img src="images/gown4.jpg" />
             <figcaption>Maharlika Majesty</figcaption>
-            <button class="rent">Rent</button>
-            <button class="buy">Buy</button>
-            <p class="status" style="display: none;">Unavailable</p> <!-- Status message -->
+            <button class="add-quantity" onclick="location.href='adminquantity.html?item=Maharlika%20Majesty'">Add Quantity</button>
+            <p class="status">Unavailable</p>
           </div>
+        
           <!--3rd row-->
           <div class="pic gown" data-name="Bulaklakan Beauty">
             <img src="images/gown5.jpeg" />
             <figcaption>Bulaklakan Beauty</figcaption>
-            <button class="rent">Rent</button>
-            <button class="buy">Buy</button>
-            <p class="status" style="display: none;">Unavailable</p> <!-- Status message -->
+            <button class="add-quantity" onclick="location.href='adminquantity.html?item=Bulaklakan%20Beauty'">Add Quantity</button>
+            <p class="status">Unavailable</p>
           </div>
           <div class="pic suit" data-name="Diwang Dakila">
             <img src="images/suit6.jpg" />
             <figcaption>Diwang Dakila</figcaption>
-            <button class="rent">Rent</button>
-            <button class="buy">Buy</button>
-            <p class="status" style="display: none;">Unavailable</p> <!-- Status message -->
+            <button class="add-quantity" onclick="location.href='adminquantity.html?item=Diwang%20Dakila'">Add Quantity</button>
+            <p class="status">Unavailable</p>
           </div>
           <div class="pic gown" data-name="Diwata Divinity">
             <img src="images/gown6.jpg" />
             <figcaption>Diwata Divinity</figcaption>
-            <button class="rent">Rent</button>
-            <button class="buy">Buy</button>
-            <p class="status" style="display: none;">Unavailable</p> <!-- Status message -->
+            <button class="add-quantity" onclick="location.href='adminquantity.html?item=Diwata%20Divinity'">Add Quantity</button>
+            <p class="status">Unavailable</p>
           </div>
           <div class="pic suit" data-name="Sibol Suit">
             <img src="images/suit7.jpg" />
             <figcaption>Sibol Suit</figcaption>
-            <button class="rent">Rent</button>
-            <button class="buy">Buy</button>
-            <p class="status" style="display: none;">Unavailable</p> <!-- Status message -->
+            <button class="add-quantity" onclick="location.href='adminquantity.html?item=Sibol%20Suit'">Add Quantity</button>
+            <p class="status">Unavailable</p>
           </div>
+        
           <!--4th row-->
           <div class="pic suit" data-name="Amihan Attire">
             <img src="images/suit10.jpg" />
             <figcaption>Amihan Attire</figcaption>
-            <button class="rent">Rent</button>
-            <button class="buy">Buy</button>
-            <p class="status" style="display: none;">Unavailable</p> <!-- Status message -->
+            <button class="add-quantity" onclick="location.href='adminquantity.html?item=Amihan%20Attire'">Add Quantity</button>
+            <p class="status">Unavailable</p>
           </div>
           <div class="pic gown" data-name="Perlas ng Silangan">
             <img src="images/gown7.jpg" />
             <figcaption>Perlas ng Silangan</figcaption>
-            <button class="rent">Rent</button>
-            <button class="buy">Buy</button>
-            <p class="status" style="display: none;">Unavailable</p> <!-- Status message -->
+            <button class="add-quantity" onclick="location.href='adminquantity.html?item=Perlas%20ng%20Silangan'">Add Quantity</button>
+            <p class="status">Unavailable</p>
           </div>
           <div class="pic gown" data-name="Mutya Splendor">
             <img src="images/gown8.jpg" />
             <figcaption>Mutya Splendor</figcaption>
-            <button class="rent">Rent</button>
-            <button class="buy">Buy</button>
-            <p class="status" style="display: none;">Unavailable</p> <!-- Status message -->
+            <button class="add-quantity" onclick="location.href='adminquantity.html?item=Mutya%20Splendor'">Add Quantity</button>
+            <p class="status">Unavailable</p>
           </div>
           <div class="pic suit" data-name="Siklab Suit">
             <img src="images/suit9.jpg" />
             <figcaption>Siklab Suit</figcaption>
-            <button class="rent">Rent</button>
-            <button class="buy">Buy</button>
-            <p class="status" style="display: none;">Unavailable</p> <!-- Status message -->
-          </div> 
-          
+            <button class="add-quantity" onclick="location.href='adminquantity.html?item=Siklab%20Suit'">Add Quantity</button>
+            <p class="status">Unavailable</p>
+          </div>
+        
           <!--5th row-->
           <div class="pic suit" data-name="Sining Suit">
             <img src="images/suit1.jpg" />
             <figcaption>Sining Suit</figcaption>
-            <button class="rent">Rent</button>
-            <button class="buy">Buy</button>
-            <p class="status" style="display: none;">Unavailable</p> <!-- Status message -->
+            <button class="add-quantity" onclick="location.href='adminquantity.html?item=Sining%20Suit'">Add Quantity</button>
+            <p class="status">Unavailable</p>
           </div>
           <div class="pic gown" data-name="Diwata Divinity">
             <img src="images/gown10.jpg" />
             <figcaption>Diwata Divinity</figcaption>
-            <button class="rent">Rent</button>
-            <button class="buy">Buy</button>
-            <p class="status" style="display: none;">Unavailable</p> <!-- Status message -->
+            <button class="add-quantity" onclick="location.href='adminquantity.html?item=Diwata%20Divinity'">Add Quantity</button>
+            <p class="status">Unavailable</p>
           </div>
           <div class="pic gown" data-name="Rosal Radiance">
             <img src="images/gown12.jpg" />
             <figcaption>Rosal Radiance</figcaption>
-            <button class="rent">Rent</button>
-            <button class="buy">Buy</button>
-            <p class="status" style="display: none;">Unavailable</p> <!-- Status message -->
+            <button class="add-quantity" onclick="location.href='adminquantity.html?item=Rosal%20Radiance'">Add Quantity</button>
+            <p class="status">Unavailable</p>
           </div>
           <div class="pic suit" data-name="Matikas Masterpiece">
             <img src="images/suit13.jpg" />
             <figcaption>Matikas Masterpiece</figcaption>
-            <button class="rent">Rent</button>
-            <button class="buy">Buy</button>
-            <p class="status" style="display: none;">Unavailable</p> <!-- Status message -->
+            <button class="add-quantity" onclick="location.href='adminquantity.html?item=Matikas%20Masterpiece'">Add Quantity</button>
+            <p class="status">Unavailable</p>
           </div>
         </div>
       </div>
     </section>
 
-    <footer class="footer">
-      <p>&copy; 2024 LuzViMin. All rights reserved.</p>
-    </footer>
 
     <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
-    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
-      
-      // Firebase configuration
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+      import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
+    
       const firebaseConfig = {
         apiKey: "AIzaSyCQT-w4iKv3MuivCPdtB6LYHWlm9IucJKI",
         authDomain: "luzvimin-4a51e.firebaseapp.com",
@@ -233,7 +209,7 @@
         appId: "1:137799781399:web:2010b8cafe6b06453ae052",
         measurementId: "G-MKJT7NXH71"
       };
-      
+    
       // Initialize Firebase
       const app = initializeApp(firebaseConfig);
       const db = getDatabase(app);
@@ -270,38 +246,6 @@
           }
         });
       };
-      
-      document.addEventListener('click', function(event) {
-        if (event.target.classList.contains('rent') || event.target.classList.contains('buy')) {
-          const itemDiv = event.target.closest('.pic');
-          const itemName = itemDiv.getAttribute('data-name');
-      
-          if (itemName) {
-            const itemRef = ref(db, 'items/' + itemName);
-            get(itemRef).then((snapshot) => {
-              if (snapshot.exists()) {
-                const itemData = snapshot.val();
-                const rentPrice = encodeURIComponent(itemData.rentPrice);
-      
-                console.log('Item Name:', itemName);
-                console.log('Rent Price:', rentPrice);
-      
-                if (event.target.classList.contains('rent')) {
-                  // Redirect to rent page with item details
-                  window.location.href = `rentshop.html?name=${encodeURIComponent(itemName)}&price=${rentPrice}`;
-                } else if (event.target.classList.contains('buy')) {
-                  console.log('Buying item:', itemName);
-                }
-              } else {
-                console.error('Item not found in database');
-              }
-            }).catch((error) => {
-              console.error('Error fetching data:', error);
-            });
-          }
-        }
-      });
     </script>
-    
   </body>
 </html>

@@ -1,0 +1,257 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins");
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  color: #000000;
+  background-color: #f0f0f0;
+}
+
+.header {
+  position: fixed;
+  background-color: #fff;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.logo img {
+  height: auto;
+  max-width: 150px; /* Ensures logo fits within the container */
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .nav-link {
+  display: inline-block;
+  font-size: 18px;
+  color: #cc8f0c;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 20px; /* Space between links */
+  transition: color 0.3s;
+  opacity: 0;
+  animation: slideTop 0.5s ease forwards;
+  animation-delay: 0.2s;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: #74540f;
+  font-weight: bold;
+}
+
+/* KEYFRAMES ANIMATION */
+@keyframes slideTop {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* RENT SHOP STYLING */
+.rent-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  margin: 300px auto; /* Center the container with some top margin */
+}
+
+.rent-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#item-details {
+  margin-bottom: 20px;
+}
+
+#item-details h3 {
+  margin: 0;
+  color: #cc8f0c;
+}
+
+#item-details p {
+  margin: 5px 0;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+  color: #cc8f0c;
+}
+
+.form-group input[type="number"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button[type="submit"],
+#check-out {
+  width: 100%;
+  padding: 10px;
+  background-color: #a87812;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+button[type="submit"]:hover,
+#check-out:hover {
+  background-color: #b08c3e;
+}
+
+#total-cost {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #a87812;
+}
+
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black with opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* Center the modal */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Full width */
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Payment Options */
+.payment-options {
+    text-align: center; /* Center the payment options */
+    margin-bottom: 20px;
+}
+
+.payment-options button {
+    width: 100%;
+    padding: 10px;
+    background-color: #a87812;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.payment-options button:hover {
+    background-color: #b08c3e;
+}
+
+/* Payment Details */
+.payment-details {
+    margin-top: 20px;
+}
+
+.payment-details h4 {
+    margin-bottom: 10px;
+    color: #cc8f0c;
+    text-align: center;
+}
+
+.payment-details p {
+    margin: 10px 0;
+}
+
+.payment-details input[type="text"] {
+    width: calc(100% - 22px); /* Adjust width to account for padding and border */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.payment-details img {
+    display: block;
+    margin: 0 auto 10px auto; /* Center the QR code and add margin */
+}
+
+/* Submit Button */
+#submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #a87812;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+#submit-button:hover {
+    background-color: #b08c3e;
+}
+
+

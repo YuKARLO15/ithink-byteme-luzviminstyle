@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+    <link rel="stylesheet" href="adminorders.css">
+</head>
+
+<body>
+    <header class="header">
+        <a href="#" class="logo">
+            <img src="images/logo3.png" alt="LuzViMin logo" width="150" height="auto" />
+        </a>
+        <nav class="navbar">
+            <a href="adminshop.html" style="--i: 1" class="nav-link">Shop</a>
+        </nav>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="order-id-input" placeholder="Enter Order ID" />
+        <button id="search-button">Search</button>
+    </div>
+
+    <div id="orders-container" class="orders-container"></div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+      import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
+      
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCQT-w4iKv3MuivCPdtB6LYHWlm9IucJKI",
+        authDomain: "luzvimin-4a51e.firebaseapp.com",
+        databaseURL: "https://luzvimin-4a51e-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "luzvimin-4a51e",
+        storageBucket: "luzvimin-4a51e.appspot.com",
+        messagingSenderId: "137799781399",
+        appId: "1:137799781399:web:2010b8cafe6b06453ae052",
+        measurementId: "G-MKJT7NXH71"
+      };
+      
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+    
+      // Function to fetch and display all orders
+      async function fetchAllOrders() {
+        const ordersContainer = document.getElementById('orders-container');
+        const ordersRef = ref(db, 'rentorders');
+        
+        try {
+          // Get a snapshot of all users' orders
+          const snapshot = await get(ordersRef);
+          
+          if (snapshot.exists()) {
+            const orders = [];
+            snapshot.forEach(userOrdersSnapshot => {
+              const userOrders = userOrdersSnapshot.val();
+              for (const [orderId, order] of Object.entries(userOrders)) {
+                orders.push(order);
+              }
+            });
+            
+            // Display all orders
+            displayOrders(orders);
+          } else {
+            ordersContainer.innerHTML = '<p>No orders found.</p>';
+          }
+        } catch (error) {
+          console.error('Error fetching orders:', error);
+          ordersContainer.innerHTML = '<p>Error fetching orders. Please try again later.</p>';
+        }
+      }
+
+      // Function to display orders
+      function displayOrders(orders) {
+        const ordersContainer = document.getElementById('orders-container');
+        ordersContainer.innerHTML = orders.map(order => `
+          <div class="order" data-order-id="${order.orderId}">
+            <h3>Order ID: ${order.orderId}</h3>
+            <p>Item Name: ${order.itemName}</p>
+            <p>Hours: ${order.hours}</p>
+            <p>Total Cost: ₱${order.totalCost}</p>
+            <p>Payment Mode: ${order.paymentMode}</p>
+            <p>Sender Name: ${order.senderName}</p>
+            <p>Rent Price Per Hour: ₱${order.rentPricePerHour}</p>
+            <p>Reference Number: ${order.referenceNumber}</p>
+            <p>Timestamp: ${order.timestamp}</p>
+          </div>
+        `).join('');
+      }
+
+      // Function to search orders by ID
+      async function searchOrderById(orderId) {
+        const ordersContainer = document.getElementById('orders-container');
+        const allOrders = Array.from(document.querySelectorAll('.order'));
+        
+        const foundOrder = allOrders.find(order => order.dataset.orderId === orderId);
+        
+        if (foundOrder) {
+          ordersContainer.prepend(foundOrder);
+        } else {
+          // No order found, show alert
+          alert('No order found with this ID.');
+        }
+      }
+
+      // Event listener for search button
+      document.getElementById('search-button').addEventListener('click', () => {
+        const orderId = document.getElementById('order-id-input').value.trim();
+        if (orderId) {
+          searchOrderById(orderId);
+        } else {
+          alert('Please enter an Order ID.');
+        }
+      });
+      fetchAllOrders();
+    </script>
+</body>
+</html>
