@@ -75,59 +75,69 @@
       </form>
     </div>
 
+    <!-- Load Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js"></script>
+
+    <!-- Your custom script -->
     <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
-      import {
-        getDatabase,
-        ref,
-        child,
-        get,
-      } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+        import { getDatabase, ref, child, get } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
 
-      const firebaseConfig = {
-        apiKey: "AIzaSyCQT-w4iKv3MuivCPdtB6LYHWlm9IucJKI",
-        authDomain: "luzvimin-4a51e.firebaseapp.com",
-        databaseURL:
-          "https://luzvimin-4a51e-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "luzvimin-4a51e",
-        storageBucket: "luzvimin-4a51e.appspot.com",
-        messagingSenderId: "137799781399",
-        appId: "1:137799781399:web:2010b8cafe6b06453ae052",
-        measurementId: "G-MKJT7NXH71",
-      };
+        const firebaseConfig = {
+            apiKey: "AIzaSyCQT-w4iKv3MuivCPdtB6LYHWlm9IucJKI",
+            authDomain: "luzvimin-4a51e.firebaseapp.com",
+            databaseURL: "https://luzvimin-4a51e-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "luzvimin-4a51e",
+            storageBucket: "luzvimin-4a51e.appspot.com",
+            messagingSenderId: "137799781399",
+            appId: "1:137799781399:web:2010b8cafe6b06453ae052",
+            measurementId: "G-MKJT7NXH71"
+        };
 
-      const app = initializeApp(firebaseConfig);
-      const db = getDatabase(app);
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
 
-      const loginForm = document.getElementById("LoginForm");
+        const loginForm = document.getElementById("LoginForm");
 
-      loginForm.addEventListener("submit", async function (event) {
-        event.preventDefault();
+        loginForm.addEventListener("submit", async function(event) {
+            event.preventDefault();
 
-        const username = loginForm.username.value;
-        const password = loginForm.password.value;
+            const username = loginForm.username.value;
+            const password = loginForm.password.value;
 
-        try {
-          // Check if the username exists in the database
-          const userSnapshot = await get(child(ref(db), `users/${username}`));
-          if (userSnapshot.exists()) {
-            const userData = userSnapshot.val();
+            try {
+                const adminSnapshot = await get(child(ref(db), `owner/admin`));
+                if (adminSnapshot.exists()) {
+                    const adminData = adminSnapshot.val();
 
-            // Check if the entered password matches the stored password
-            if (password === userData.password) {
-              alert("Login successful!");
-              window.location.href = "shop.html"; // Redirect to landing page
-            } else {
-              alert("Incorrect password. Please try again.");
+                    if (username === "admin" && password === adminData.password) {
+                        localStorage.setItem('loggedInUser', username);
+                        alert("Login successful!");
+                        window.location.href = "adminshop.html";
+                        return;
+                    }
+                }
+
+                const userSnapshot = await get(child(ref(db), `users/${username}`));
+                if (userSnapshot.exists()) {
+                    const userData = userSnapshot.val();
+
+                    if (password === userData.password) {
+                        localStorage.setItem('loggedInUser', username);
+                        alert("Login successful!");
+                        window.location.href = "shop.html"; // Redirect to user orders page
+                    } else {
+                        alert("Incorrect password. Please try again.");
+                    }
+                } else {
+                    alert("Username not found. Please check your username.");
+                }
+            } catch (error) {
+                console.error("Error logging in:", error);
+                alert("Login failed. Please try again later.");
             }
-          } else {
-            alert("Username not found. Please check your username.");
-          }
-        } catch (error) {
-          console.error("Error logging in:", error);
-          alert("Login failed. Please try again later.");
-        }
-      });
+        });
     </script>
 
     <footer class="footer">

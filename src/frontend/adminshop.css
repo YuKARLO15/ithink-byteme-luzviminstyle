@@ -407,7 +407,7 @@ h3 {
   font-size: 23px;
 }
 
-.rent {
+.add-quantity {
   background-color: #cb8d09;
   cursor: pointer;
   padding: 8px 13px;
@@ -415,11 +415,11 @@ h3 {
   border-radius: 8px;
   color: aliceblue;
 }
-.rent:hover {
+.add-quantity:hover {
   background-color: #d5ad55; /* Change to a darker shade or different color */
 }
 
-.buy {
+.order-now {
   background-color: #cb8d09;
   cursor: pointer;
   padding: 8px 13px;
@@ -428,7 +428,7 @@ h3 {
   border-radius: 8px;
 }
 
-.buy:hover {
+.order-now:hover {
   background-color: #d5ad55; /* Change to a darker shade or different color */
 }
 
@@ -450,6 +450,3 @@ h3 {
   height: 100%;
   background: rgba(0, 0, 0, 0.5); /* Darkening overlay */
 }
-
-
-

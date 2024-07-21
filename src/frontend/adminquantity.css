@@ -17,10 +17,6 @@ body {
   background-color: #f0f0f0;
 }
 
-.heading {
-  text-align: center;
-  font-size: 4.5rem;
-}
 .header {
   position: fixed;
   background-color: #fff;
@@ -28,7 +24,6 @@ body {
   left: 0;
   width: 100%;
   padding: 10px 10%;
-  background: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -60,25 +55,11 @@ body {
   color: #74540f;
   font-weight: bold;
 }
-.nav-link.active {
-  color: #74540f;
-  font-weight: bold;
-}
 
 /* KEYFRAMES ANIMATION */
 @keyframes slideRight {
   0% {
     transform: translateX(-100px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-@keyframes slideLeft {
-  0% {
-    transform: translateX(100px);
     opacity: 0;
   }
   100% {
@@ -96,108 +77,46 @@ body {
     opacity: 1;
   }
 }
-@keyframes slideBottom {
-  0% {
-    transform: translateY(-100px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-@keyframes zoomIn {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-@keyframes floatImage {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-24px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
 
-/* KEYFRAMES ANIMATION (JHAZ) */
-
-@keyframes animate {
-  0% {
-    width: 100px;
-  }
-  50% {
-    width: 200px;
-  }
-  100% {
-    width: 100px;
-  }
-}
-
-/*  MEDIA QUERY? */
-
-@media only screen and (max-width: 768px) {
-  .card {
-    max-width: 300px; /* Adjust width for smaller screens */
-  }
-}
-
-.signup-form {
+/* FORM STYLING */
+.quantity-form {
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 100%;
-  padding-top: 180px;
-  padding-left: 500px;
-  padding-right: 500px;
+  max-width: 600px;
+  margin: 220px auto;
+  padding-top: 50px; /* Adjust space at the top */
 }
 
-.signup-form h2 {
+.quantity-form h2 {
   text-align: center;
   margin-bottom: 20px;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px; /* Increased space between form groups */
 }
 
 .form-group label {
   font-weight: bold;
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 10px; /* More space below labels */
   color: #cc8f0c;
 }
 
-.form-group input[type="text"],
-.form-group input[type="password"],
-.form-group input[type="email"],
-.form-group input[type="address"],
-.form-group textarea,
 .form-group input[type="number"] {
   width: 100%;
-  padding: 8px;
+  padding: 12px; /* Increased padding for better input appearance */
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
 
-.form-group textarea {
-  resize: vertical; /* Allow vertical resizing of textarea */
-}
-
 button[type="submit"] {
-  width: 30%;
+  width: 100%;
   padding: 10px;
-  margin-left: 480px;
   background-color: #a87812;
   color: white;
   border: none;
@@ -210,9 +129,7 @@ button[type="submit"]:hover {
   background-color: #b08c3e;
 }
 
-/*FOOTER*/
-
-/*footer*/
+/* FOOTER */
 .footer {
   background-color: #fff;
   color: black;

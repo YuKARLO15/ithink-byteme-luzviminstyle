@@ -1,0 +1,210 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins");
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
+}
+html {
+  overflow-x: hidden;
+}
+body {
+  color: #000000;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.heading {
+  text-align: center;
+  font-size: 4.5rem;
+}
+.header {
+  position: fixed;
+  background-color: #fff;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 10px;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+.logo {
+  font-size: 10px;
+  color: #000000;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: default;
+  opacity: 0;
+  animation: slideRight 1s ease forwards;
+}
+.navbar a {
+  display: inline-block;
+  font-size: 18px;
+  color: #cc8f0c;
+  text-decoration: none;
+  font-weight: 500;
+  margin-right: 85px;
+  transition: 0.3s;
+  opacity: 0;
+  animation: slideTop 0.5s ease forwards;
+  animation-delay: calc(0.2s * var(--i));
+}
+.navbar a:hover,
+.navbar a.active {
+  color: #74540f;
+  font-weight: bold;
+}
+.nav-link.active {
+  color: #74540f;
+  font-weight: bold;
+}
+
+/* KEYFRAMES ANIMATION */
+@keyframes slideRight {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideLeft {
+  0% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideTop {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slideBottom {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes zoomIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes floatImage {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-24px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* KEYFRAMES ANIMATION (JHAZ) */
+
+@keyframes animate {
+  0% {
+    width: 100px;
+  }
+  50% {
+    width: 200px;
+  }
+  100% {
+    width: 100px;
+  }
+}
+
+.search-container {
+    margin-top: 100px; /* Space between the header and the search container */
+    padding: 20px; /* Adjusted padding for better appearance */
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    align-items: center; /* Center items horizontally */
+    gap: 10px; /* Space between input and button */
+    max-width: 600px; /* Maximum width for the container */
+    margin-left: auto;
+    margin-right: auto; /* Center container horizontally */
+  }
+  
+  .search-container input {
+    margin-top: 100px;
+    padding: 15px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 100%; /* Full width to fit container */
+    max-width: 100%; /* Ensure it does not exceed container width */
+    background-color: #fff;
+    color: #000;
+  }
+  
+  .search-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #cc8f0c;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .search-container button:hover {
+    background-color: #74540f;
+  }
+  
+  /* Ensure orders-container is properly styled */
+  .orders-container {
+    padding: 20px 50px; /* Adjust padding as needed */
+    margin-top: 20px; /* Margin to separate from search container */
+    max-width: 1200px; /* Maximum width to keep content centered */
+    margin-left: auto;
+    margin-right: auto; /* Center container horizontally */
+  }
+  
+ 
+  .order {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .order h3 {
+    color: #cc8f0c;
+    margin-bottom: 10px;
+  }
+  
+  .order p {
+    margin: 5px 0;
+  }
+  

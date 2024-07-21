@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Add Item Quantity</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="images/logo3.png" type="image/x-icon" />
+  <link rel="stylesheet" href="adminquantity.css" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+  <header class="header">
+    <a href="#" class="logo">
+      <img src="images/logo3.png" alt="LuzViMin logo" width="150px" height="auto" />
+    </a>
+    <nav class="navbar">
+      <a href="adminshop.html" style="--i: 4" class="hovercart">
+        <i class="fa-solid fa-left-long"></i>
+      </a>
+    </nav>
+  </header>
+
+  <div class="quantity-form">
+    <h2 id="item-name">Add Quantity for Item</h2>
+    
+    <form id="quantityForm">
+      <div class="form-group">
+        <label for="itemQuantity">Quantity</label>
+        <input type="number" id="itemQuantity" placeholder="Enter quantity" required>
+      </div>
+      <div class="form-group">
+        <label for="itemPrice">Price</label>
+        <input type="number" id="itemPrice" placeholder="Enter price" required>
+      </div>
+      <div class="form-group">
+        <label for="rentPrice">Rent Price per Hour</label>
+        <input type="number" id="rentPrice" placeholder="Enter rent price per hour" required>
+      </div>
+      <button type="submit">Save Item</button>
+    </form>
+  </div>
+
+
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCQT-w4iKv3MuivCPdtB6LYHWlm9IucJKI",
+      authDomain: "luzvimin-4a51e.firebaseapp.com",
+      databaseURL: "https://luzvimin-4a51e-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "luzvimin-4a51e",
+      storageBucket: "luzvimin-4a51e.appspot.com",
+      messagingSenderId: "137799781399",
+      appId: "1:137799781399:web:2010b8cafe6b06453ae052",
+      measurementId: "G-MKJT7NXH71"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+  
+    // Function to get query parameters
+    function getQueryParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        item: params.get('item')
+      };
+    }
+  
+    window.onload = function() {
+      const params = getQueryParams();
+      const itemNameElement = document.getElementById('item-name');
+      const item = params.item;
+      
+      if (item) {
+        itemNameElement.textContent = `Add Quantity for ${item}`;
+      }
+    };
+  
+    // Handle form submission
+    document.getElementById('quantityForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the default form submission
+  
+      const item = getQueryParams().item; // Get the item name from query parameters
+      const itemQuantity = document.getElementById('itemQuantity').value;
+      const itemPrice = document.getElementById('itemPrice').value;
+      const rentPrice = document.getElementById('rentPrice').value;
+  
+      console.log('Form submitted');
+      console.log('Item:', item);
+      console.log('Quantity:', itemQuantity);
+      console.log('Price:', itemPrice);
+      console.log('Rent Price:', rentPrice);
+  
+      if (item) {
+      const itemRef = ref(db, 'items/' + item);
+      set(itemRef, {
+        quantity: itemQuantity,
+        price: itemPrice,
+        rentPrice: rentPrice
+      }).then(() => {
+        console.log('Data saved successfully');
+        alert('Data saved successfully');
+      }).catch((error) => {
+        console.error('Error saving data: ', error);
+        alert('Error saving data: ' + error.message);
+      });
+    } else {
+      console.log('No item specified');
+      alert('No item specified');
+    }
+  });
+  </script>
+
+</body>
+</html>

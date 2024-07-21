@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="images/logo3.png" type="image/x-icon" />
-    <link rel="stylesheet" href="message.css" />
+    <link rel="stylesheet" href="adminmessage.css" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
@@ -24,13 +24,11 @@
         width="150px"
         height="auto"
     /></a>
-
     <nav class="navbar">
-      <a href="shop.html" style="--i: 4" class="hovercart"
+      <a href="adminshop.html" style="--i: 4" class="hovercart"
         ><i class="fa-solid fa-left-long"></i
       ></a>
     </nav>
-    
   </header>
 
   <body>
@@ -40,6 +38,9 @@
         <h2>Inbox</h2>
         <ul class="inbox-list">
           <li><a href="#">LuzViMin Style</a></li>
+          <li><a href="#">User 1</a></li>
+          <li><a href="#">User 2</a></li>
+          <!-- Add more items as needed -->
         </ul>
       </div>
 
@@ -48,17 +49,17 @@
         <div class="messages">
           <!-- Messages will be displayed here -->
           <div class="message">
-            <p><strong class="user-placeholder">User</strong>: Hello!</p>
-        </div>
-        <div class="message">
-            <p><strong>Admin:</strong> How may I assist you today?</p>
-        </div>
-        <div class="message">
-            <p><strong class="user-placeholder">User</strong>: Is Luna Luster Still Available?</p>
-        </div>
-        <div class="message">
-            <p><strong>Admin:</strong> Yes, Luna Luster is still available</p>
-        </div>
+            <p><strong>User :</strong> Hello!</p>
+          </div>
+          <div class="message">
+            <p><strong>Admin:</strong> How may I aassist you today?</p>
+          </div>
+          <div class="message">
+            <p><strong>User: </strong> Is Luna Luster Still Available?</p>
+          </div>
+          <div class="message">
+            <p><strong>User: </strong> Yes, Luna Luster is still available</p>
+          </div>
           <!-- Add more messages as needed -->
         </div>
         <div class="message-compose">
@@ -109,26 +110,5 @@
         </div>
       </div>
     </footer>
-    <script>
-      // Retrieve the logged-in username from localStorage
-      const loggedInUser = localStorage.getItem('loggedInUser');
-
-      if (loggedInUser) {
-          // Get all elements with the class 'user-placeholder'
-          const userPlaceholders = document.querySelectorAll('.user-placeholder');
-
-          // Replace "User" with the logged-in username in each placeholder
-          userPlaceholders.forEach(function(element) {
-              element.textContent = loggedInUser;
-          });
-      } else {
-          alert("No user logged in");
-          window.location.href = "login.html";
-      }
-  </script>
-
-
-
-
   </body>
 </html>
