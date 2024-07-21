@@ -7,21 +7,15 @@
       <RouterLink :to="{ path: '/', hash: '#section1' }" style="--i: 1" class="nav-link"
         >Home</RouterLink
       >
-      <RouterLink :to="{ path: '/', hash: '#section2' }" style="--i: 2" class="nav-link"
-        >About Us</RouterLink
-      >
-      <!-- <a href="#" style="--i:4;" class="hovercart"><img src = "" ></a> -->
-      <RouterLink to="/signup" style="--i: 3" class="nav-link"><strong>Sign Up</strong></RouterLink>
+      <RouterLink to="/login" style="--i: 2" class="nav-link">Sign In</RouterLink>
     </nav>
   </header>
 </template>
 
 <script>
-import { RouterLink } from 'vue-router'
-
 export default {
-  name: 'HeaderComponent'
-  // Your component's logic here
+  name: 'SignupHeaderComponent'
+  // Your component options go here
 }
 </script>
 
