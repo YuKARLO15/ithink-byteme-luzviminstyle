@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import HomeSection from '../components/HomeSection.vue'
 import AboutSection from '../components/AboutSection.vue'
-import ShopSection from '../components/ShopSection.vue'
+import HeaderComponent from '../components/HeaderComponent.vue'
 </script>
 
 <template>
   <main>
+    <HeaderComponent />
     <HomeSection />
     <AboutSection />
-    <ShopSection />
   </main>
 </template>
