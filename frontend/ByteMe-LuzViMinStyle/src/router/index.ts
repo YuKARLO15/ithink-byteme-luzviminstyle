@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, type RouterScrollBehavior } from 'vue-r
 import HomeView from '../views/HomeView.vue'
 import SignupView from '../views/SignupView.vue'
 import LoginView from '../views/LoginView.vue'
+import ShopView from '../views/ShopView.vue'
 import { nextTick } from 'vue'
 
 const scrollBehavior: RouterScrollBehavior = async (to, from, savedPosition) => {
@@ -39,6 +40,11 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView
+    },
+    {
+      path: '/shop',
+      name: 'shop',
+      component: ShopView
     }
   ]
 })

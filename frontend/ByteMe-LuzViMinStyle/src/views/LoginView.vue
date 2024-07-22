@@ -60,12 +60,24 @@ export default {
   methods: {
     async login() {
       try {
+        const adminSnapshot = await get(child(ref(db), `owner/admin`));
+          if (adminSnapshot.exists()) {
+              const adminData = adminSnapshot.val();
+
+              if (this.username === "admin" && this.password === adminData.password) {
+                  localStorage.setItem('loggedInUser', this.username);
+                  alert("Login successful!");
+                  this.$router.push({ path: '/adminshop' }); // Assuming Vue Router for admin navigation
+                  return;
+              }
+          }
+
         const userSnapshot = await get(child(ref(db), `users/${this.username}`))
         if (userSnapshot.exists()) {
           const userData = userSnapshot.val()
           if (this.password === userData.password) {
             alert('Login successful!')
-            this.$router.push({ path: '/' }) // Use Vue Router for navigation
+            this.$router.push({ path: '/shop' }) // Use Vue Router for navigation
           } else {
             alert('Incorrect password. Please try again.')
           }
