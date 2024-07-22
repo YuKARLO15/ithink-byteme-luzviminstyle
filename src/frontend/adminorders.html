@@ -48,7 +48,7 @@
       async function fetchAllOrders() {
         const ordersContainer = document.getElementById('orders-container');
         const rentOrdersRef = ref(db, 'rentorders');
-        const buyOrdersRef = ref(db, 'buyorders');z
+        const buyOrdersRef = ref(db, 'buyorders');
         
         try {
           const [rentOrdersSnapshot, buyOrdersSnapshot] = await Promise.all([
@@ -205,16 +205,16 @@
           }
 
           if (foundOrder) {
-            displayOrders(orders, orderIdInput);
-          } else {
-            displayOrders(orders);
-            ordersContainer.innerHTML += '<p>No orders found with the provided ID.</p>';
-          }
-        } catch (error) {
-          console.error('Error searching for order:', error);
-          ordersContainer.innerHTML = '<p>Error searching for order. Please try again later.</p>';
-        }
-      });
+        displayOrders(orders, orderIdInput);
+      } else {
+        displayOrders(orders);
+        alert('No orders found with the provided ID.');
+      }
+    } catch (error) {
+      console.error('Error searching for order:', error);
+      ordersContainer.innerHTML = '<p>Error searching for order. Please try again later.</p>';
+    }
+  });
     </script>
 </body>
 </html>
