@@ -290,13 +290,15 @@
         if (snapshot.exists()) {
           const itemData = snapshot.val();
           const price = encodeURIComponent(itemData.price); // Fetch and encode price
+          const rentprice = encodeURIComponent(itemData.rentPrice); // Fetch and encode price
 
           console.log('Item Name:', itemName);
           console.log('Price:', price);
+          console.log('rentPrice:', rentprice);
           
           if (event.target.classList.contains('rent')) {
             // Redirect to rent page with item details
-            window.location.href = `rentshop.html?name=${encodeURIComponent(itemName)}&price=${price}`;
+            window.location.href = `rentshop.html?name=${encodeURIComponent(itemName)}&rentprice=${rentprice}`;
           } else if (event.target.classList.contains('buy')) {
             // Redirect to buyorder.html with item details
             window.location.href = `buyshop.html?name=${encodeURIComponent(itemName)}&price=${price}`;
