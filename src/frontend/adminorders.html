@@ -26,7 +26,7 @@
 
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
-      import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
+      import { getDatabase, ref, get, set, remove } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
       
       // Your web app's Firebase configuration
       const firebaseConfig = {
@@ -47,26 +47,36 @@
       // Function to fetch and display all orders
       async function fetchAllOrders() {
         const ordersContainer = document.getElementById('orders-container');
-        const ordersRef = ref(db, 'rentorders');
+        const rentOrdersRef = ref(db, 'rentorders');
+        const buyOrdersRef = ref(db, 'buyorders');z
         
         try {
-          // Get a snapshot of all users' orders
-          const snapshot = await get(ordersRef);
+          const [rentOrdersSnapshot, buyOrdersSnapshot] = await Promise.all([
+            get(rentOrdersRef),
+            get(buyOrdersRef)
+          ]);
           
-          if (snapshot.exists()) {
-            const orders = [];
-            snapshot.forEach(userOrdersSnapshot => {
+          const orders = [];
+          
+          if (rentOrdersSnapshot.exists()) {
+            rentOrdersSnapshot.forEach(userOrdersSnapshot => {
               const userOrders = userOrdersSnapshot.val();
               for (const [orderId, order] of Object.entries(userOrders)) {
-                orders.push(order);
+                orders.push({ ...order, orderType: 'rent', user: userOrdersSnapshot.key });
               }
             });
-            
-            // Display all orders
-            displayOrders(orders);
-          } else {
-            ordersContainer.innerHTML = '<p>No orders found.</p>';
           }
+
+          if (buyOrdersSnapshot.exists()) {
+            buyOrdersSnapshot.forEach(userOrdersSnapshot => {
+              const userOrders = userOrdersSnapshot.val();
+              for (const [orderId, order] of Object.entries(userOrders)) {
+                orders.push({ ...order, orderType: 'buy', user: userOrdersSnapshot.key });
+              }
+            });
+          }
+
+          displayOrders(orders);
         } catch (error) {
           console.error('Error fetching orders:', error);
           ordersContainer.innerHTML = '<p>Error fetching orders. Please try again later.</p>';
@@ -74,48 +84,137 @@
       }
 
       // Function to display orders
-      function displayOrders(orders) {
+      function displayOrders(orders, highlightOrderId = null) {
         const ordersContainer = document.getElementById('orders-container');
-        ordersContainer.innerHTML = orders.map(order => `
-          <div class="order" data-order-id="${order.orderId}">
+        const sortedOrders = highlightOrderId ? 
+          orders.filter(order => order.orderId === highlightOrderId)
+                .concat(orders.filter(order => order.orderId !== highlightOrderId)) 
+          : orders;
+          
+        ordersContainer.innerHTML = sortedOrders.map(order => `
+          <div class="order" data-order-id="${order.orderId}" data-order-type="${order.orderType}" data-user="${order.user}">
             <h3>Order ID: ${order.orderId}</h3>
             <p>Item Name: ${order.itemName}</p>
-            <p>Hours: ${order.hours}</p>
+            ${order.orderType === 'rent' ? `<p>Hours: ${order.hours}</p>` : `<p>Quantity: ${order.quantity}</p>`}
             <p>Total Cost: ₱${order.totalCost}</p>
             <p>Payment Mode: ${order.paymentMode}</p>
             <p>Sender Name: ${order.senderName}</p>
-            <p>Rent Price Per Hour: ₱${order.rentPricePerHour}</p>
+            ${order.orderType === 'rent' ? `<p>Rent Price Per Hour: ₱${order.rentPricePerHour}</p>` : ''}
             <p>Reference Number: ${order.referenceNumber}</p>
             <p>Timestamp: ${order.timestamp}</p>
+            <button class="process-button">Process Order</button>
+            <button class="hide-button" style="display: none;">Hide Order</button>
           </div>
         `).join('');
+        
+        // Attach event listeners to the process buttons
+        const processButtons = document.querySelectorAll('.process-button');
+        processButtons.forEach(button => {
+          button.addEventListener('click', handleProcessOrder);
+        });
+
+        // Attach event listeners to the hide buttons
+        const hideButtons = document.querySelectorAll('.hide-button');
+        hideButtons.forEach(button => {
+          button.addEventListener('click', handleHideOrder);
+        });
       }
 
-      // Function to search orders by ID
-      async function searchOrderById(orderId) {
-        const ordersContainer = document.getElementById('orders-container');
-        const allOrders = Array.from(document.querySelectorAll('.order'));
+      // Function to handle processing an order
+      async function handleProcessOrder(event) {
+        const orderElement = event.target.closest('.order');
+        const orderId = orderElement.dataset.orderId;
+        const orderType = orderElement.dataset.orderType;
+        const user = orderElement.dataset.user;
+        const userRef = ref(db, `${orderType}orders/${user}/${orderId}`);
+        const processedOrdersRef = ref(db, `processedorders/${orderType}/${orderId}`);
         
-        const foundOrder = allOrders.find(order => order.dataset.orderId === orderId);
-        
-        if (foundOrder) {
-          ordersContainer.prepend(foundOrder);
-        } else {
-          // No order found, show alert
-          alert('No order found with this ID.');
+        try {
+          const snapshot = await get(userRef);
+          if (snapshot.exists()) {
+            const orderData = snapshot.val();
+            
+            // Add to processed orders
+            await set(processedOrdersRef, orderData);
+            
+            // Remove from current orders
+            await remove(userRef);
+
+            // Show alert and update UI
+            alert('Order is processed');
+            const hideButton = orderElement.querySelector('.hide-button');
+            hideButton.style.display = 'inline-block';
+            event.target.style.display = 'none';
+          }
+        } catch (error) {
+          console.error('Error processing order:', error);
+          alert('Error processing order. Please try again later.');
         }
       }
+
+      // Function to handle hiding an order
+      function handleHideOrder(event) {
+        const orderElement = event.target.closest('.order');
+        orderElement.style.display = 'none';
+      }
+
+      // Fetch all orders on page load
+      fetchAllOrders();
 
       // Event listener for search button
-      document.getElementById('search-button').addEventListener('click', () => {
-        const orderId = document.getElementById('order-id-input').value.trim();
-        if (orderId) {
-          searchOrderById(orderId);
-        } else {
-          alert('Please enter an Order ID.');
+      document.getElementById('search-button').addEventListener('click', async () => {
+        const orderIdInput = document.getElementById('order-id-input').value.trim();
+        if (!orderIdInput) {
+          alert('Please enter an order ID');
+          return;
+        }
+
+        const ordersContainer = document.getElementById('orders-container');
+        
+        try {
+          const [rentOrdersSnapshot, buyOrdersSnapshot] = await Promise.all([
+            get(ref(db, 'rentorders')),
+            get(ref(db, 'buyorders'))
+          ]);
+
+          let orders = [];
+          let foundOrder = null;
+          
+          if (rentOrdersSnapshot.exists()) {
+            rentOrdersSnapshot.forEach(userOrdersSnapshot => {
+              const userOrders = userOrdersSnapshot.val();
+              for (const [orderId, order] of Object.entries(userOrders)) {
+                orders.push({ ...order, orderType: 'rent', user: userOrdersSnapshot.key });
+                if (orderId === orderIdInput) {
+                  foundOrder = { ...order, orderType: 'rent', user: userOrdersSnapshot.key };
+                }
+              }
+            });
+          }
+
+          if (buyOrdersSnapshot.exists()) {
+            buyOrdersSnapshot.forEach(userOrdersSnapshot => {
+              const userOrders = userOrdersSnapshot.val();
+              for (const [orderId, order] of Object.entries(userOrders)) {
+                orders.push({ ...order, orderType: 'buy', user: userOrdersSnapshot.key });
+                if (orderId === orderIdInput) {
+                  foundOrder = { ...order, orderType: 'buy', user: userOrdersSnapshot.key };
+                }
+              }
+            });
+          }
+
+          if (foundOrder) {
+            displayOrders(orders, orderIdInput);
+          } else {
+            displayOrders(orders);
+            ordersContainer.innerHTML += '<p>No orders found with the provided ID.</p>';
+          }
+        } catch (error) {
+          console.error('Error searching for order:', error);
+          ordersContainer.innerHTML = '<p>Error searching for order. Please try again later.</p>';
         }
       });
-      fetchAllOrders();
     </script>
 </body>
 </html>
