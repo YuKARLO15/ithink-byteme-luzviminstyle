@@ -244,63 +244,73 @@
         items.forEach(item => {
           const itemName = item.dataset.name;
           const statusElement = item.querySelector('.status');
+          const rentButton = item.querySelector('.rent');
+          const buyButton = item.querySelector('.buy');
       
           if (itemName) {
-            const itemRef = ref(db, 'items/' + itemName);
-      
-            get(itemRef).then((snapshot) => {
-              if (snapshot.exists()) {
-                const itemData = snapshot.val();
-                const quantity = itemData.quantity; // Assuming 'quantity' field is used to store item count
-      
-                if (quantity <= 0) {
-                  // Item is unavailable
-                  statusElement.style.display = 'block';
-                } else {
-                  // Item is available
-                  statusElement.style.display = 'none';
-                }
-              } else {
-                // Item not found, show unavailable message
-                statusElement.style.display = 'block';
-              }
-            }).catch((error) => {
-              console.error('Error fetching data:', error);
-            });
+        const itemRef = ref(db, 'items/' + itemName);
+
+        get(itemRef).then((snapshot) => {
+          if (snapshot.exists()) {
+            const itemData = snapshot.val();
+            const quantity = itemData.quantity; // 'quantity' field is used to store item count
+
+            if (quantity <= 0) {
+              // Item is unavailable
+              statusElement.style.display = 'block';
+              rentButton.disabled = true;
+              buyButton.disabled = true;
+            } else {
+              // Item is available
+              statusElement.style.display = 'none';
+              rentButton.disabled = false;
+              buyButton.disabled = false;
+            }
+          } else {
+            // Item not found, show unavailable message
+            statusElement.style.display = 'block';
+            rentButton.disabled = true;
+            buyButton.disabled = true;
           }
+        }).catch((error) => {
+          console.error('Error fetching data:', error);
         });
-      };
+      }
+    });
+  };
       
       document.addEventListener('click', function(event) {
-        if (event.target.classList.contains('rent') || event.target.classList.contains('buy')) {
-          const itemDiv = event.target.closest('.pic');
-          const itemName = itemDiv.getAttribute('data-name');
-      
-          if (itemName) {
-            const itemRef = ref(db, 'items/' + itemName);
-            get(itemRef).then((snapshot) => {
-              if (snapshot.exists()) {
-                const itemData = snapshot.val();
-                const rentPrice = encodeURIComponent(itemData.rentPrice);
-      
-                console.log('Item Name:', itemName);
-                console.log('Rent Price:', rentPrice);
-      
-                if (event.target.classList.contains('rent')) {
-                  // Redirect to rent page with item details
-                  window.location.href = `rentshop.html?name=${encodeURIComponent(itemName)}&price=${rentPrice}`;
-                } else if (event.target.classList.contains('buy')) {
-                  console.log('Buying item:', itemName);
-                }
-              } else {
-                console.error('Item not found in database');
-              }
-            }).catch((error) => {
-              console.error('Error fetching data:', error);
-            });
+  if (event.target.classList.contains('rent') || event.target.classList.contains('buy')) {
+    const itemDiv = event.target.closest('.pic');
+    const itemName = itemDiv.getAttribute('data-name');
+    
+    if (itemName) {
+      const itemRef = ref(db, 'items/' + itemName);
+      get(itemRef).then((snapshot) => {
+        if (snapshot.exists()) {
+          const itemData = snapshot.val();
+          const price = encodeURIComponent(itemData.price); // Fetch and encode price
+
+          console.log('Item Name:', itemName);
+          console.log('Price:', price);
+          
+          if (event.target.classList.contains('rent')) {
+            // Redirect to rent page with item details
+            window.location.href = `rentshop.html?name=${encodeURIComponent(itemName)}&price=${price}`;
+          } else if (event.target.classList.contains('buy')) {
+            // Redirect to buyorder.html with item details
+            window.location.href = `buyshop.html?name=${encodeURIComponent(itemName)}&price=${price}`;
           }
+        } else {
+          console.error('Item not found in database');
         }
+      }).catch((error) => {
+        console.error('Error fetching data:', error);
       });
+    }
+  }
+});
+
     </script>
     
   </body>

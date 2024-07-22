@@ -207,4 +207,30 @@ body {
   .order p {
     margin: 5px 0;
   }
-  
+
+  .order .process-button, .order .hide-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+
+  .order .process-button {
+    background-color: #cc8f0c;
+  }
+
+  .order .process-button:hover {
+    background-color: #74540f;
+  }
+
+  .order .hide-button {
+    background-color: #cc8f0c;
+  }
+
+  .order .hide-button:hover {
+    background-color:#74540f;
+  }

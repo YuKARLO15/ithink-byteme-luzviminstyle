@@ -16,73 +16,104 @@
         </nav>
     </header>
 
-    <div id="orders-container" class="orders-container"></div>
-
-
+    <div id="rent-orders-container" class="orders-container"></div>
+    <div id="buy-orders-container" class="orders-container1"></div>
+   
 
     <!-- Your custom script -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
         import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
-        
+
         // Firebase configuration
         const firebaseConfig = {
-          apiKey: "AIzaSyCQT-w4iKv3MuivCPdtB6LYHWlm9IucJKI",
-          authDomain: "luzvimin-4a51e.firebaseapp.com",
-          databaseURL: "https://luzvimin-4a51e-default-rtdb.asia-southeast1.firebasedatabase.app",
-          projectId: "luzvimin-4a51e",
-          storageBucket: "luzvimin-4a51e.appspot.com",
-          messagingSenderId: "137799781399",
-          appId: "1:137799781399:web:2010b8cafe6b06453ae052",
-          measurementId: "G-MKJT7NXH71"
+            apiKey: "AIzaSyCQT-w4iKv3MuivCPdtB6LYHWlm9IucJKI",
+            authDomain: "luzvimin-4a51e.firebaseapp.com",
+            databaseURL: "https://luzvimin-4a51e-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "luzvimin-4a51e",
+            storageBucket: "luzvimin-4a51e.appspot.com",
+            messagingSenderId: "137799781399",
+            appId: "1:137799781399:web:2010b8cafe6b06453ae052",
+            measurementId: "G-MKJT7NXH71"
         };
-        
+
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
         window.onload = async function() {
-          const username = localStorage.getItem('loggedInUser'); // Get the username from localStorage
-          if (!username) {
-            alert('No logged in user found.');
-            return;
-          }
-
-          const ordersContainer = document.getElementById('orders-container');
-
-          // Reference to the user's orders in Firebase
-          const userOrdersRef = ref(db, `rentorders/${username}`);
-          
-          try {
-            const snapshot = await get(userOrdersRef);
-            if (snapshot.exists()) {
-              const orders = snapshot.val();
-              ordersContainer.innerHTML = ''; // Clear any existing content
-
-              // Iterate over each order and display it
-              for (const orderId in orders) {
-                if (orders.hasOwnProperty(orderId)) {
-                  const order = orders[orderId];
-                  const orderElement = document.createElement('div');
-                  orderElement.classList.add('order');
-                  orderElement.innerHTML = `
-                    <h3>Order ID: ${order.orderId}</h3>
-                    <p>Item Name: ${order.itemName}</p>
-                    <p>Hours: ${order.hours}</p>
-                    <p>Total Cost: ₱${order.totalCost}</p>
-                    <p>Payment Mode: ${order.paymentMode}</p>
-                    <p>Sender Name: ${order.senderName}</p>
-                  `;
-                  ordersContainer.appendChild(orderElement);
-                }
-              }
-            } else {
-              ordersContainer.innerHTML = '<p>No orders found.</p>';
+            const username = localStorage.getItem('loggedInUser'); // Get the username from localStorage
+            if (!username) {
+                alert('No logged in user found.');
+                return;
             }
-          } catch (error) {
-            console.error('Error fetching user orders:', error);
-            ordersContainer.innerHTML = '<p>Error fetching orders. Please try again later.</p>';
-          }
+
+            const rentOrdersContainer = document.getElementById('rent-orders-container');
+            const buyOrdersContainer = document.getElementById('buy-orders-container');
+
+            // Reference to the user's orders in Firebase
+            const rentOrdersRef = ref(db, `rentorders/${username}`);
+            const buyOrdersRef = ref(db, `buyorders/${username}`);
+            
+            try {
+                // Fetch rent orders
+                const rentSnapshot = await get(rentOrdersRef);
+                if (rentSnapshot.exists()) {
+                    const rentOrders = rentSnapshot.val();
+                    rentOrdersContainer.innerHTML = ''; // Clear any existing content
+
+                    // Iterate over each rent order and display it
+                    for (const orderId in rentOrders) {
+                        if (rentOrders.hasOwnProperty(orderId)) {
+                            const order = rentOrders[orderId];
+                            const orderElement = document.createElement('div');
+                            orderElement.classList.add('order');
+                            orderElement.innerHTML = `
+                                <h3>Rent Order ID: ${order.orderId}</h3>
+                                <p>Item Name: ${order.itemName}</p>
+                                <p>Hours: ${order.hours}</p>
+                                <p>Total Cost: ₱${order.totalCost}</p>
+                                <p>Payment Mode: ${order.paymentMode}</p>
+                                <p>Sender Name: ${order.senderName}</p>
+                            `;
+                            rentOrdersContainer.appendChild(orderElement);
+                        }
+                    }
+                } else {
+                    rentOrdersContainer.innerHTML = '<p>No rent orders found.</p>';
+                }
+
+                // Fetch buy orders
+                const buySnapshot = await get(buyOrdersRef);
+                if (buySnapshot.exists()) {
+                    const buyOrders = buySnapshot.val();
+                    buyOrdersContainer.innerHTML = ''; // Clear any existing content
+
+                    // Iterate over each buy order and display it
+                    for (const orderId in buyOrders) {
+                        if (buyOrders.hasOwnProperty(orderId)) {
+                            const order = buyOrders[orderId];
+                            const orderElement = document.createElement('div');
+                            orderElement.classList.add('order');
+                            orderElement.innerHTML = `
+                                <h3>Buy Order ID: ${order.orderId}</h3>
+                                <p>Item Name: ${order.itemName}</p>
+                                <p>Quantity: ${order.quantity}</p>
+                                <p>Total Cost: ₱${order.totalCost}</p>
+                                <p>Payment Mode: ${order.paymentMode}</p>
+                                <p>Sender Name: ${order.senderName}</p>
+                            `;
+                            buyOrdersContainer.appendChild(orderElement);
+                        }
+                    }
+                } else {
+                    buyOrdersContainer.innerHTML = '<p>No buy orders found.</p>';
+                }
+            } catch (error) {
+                console.error('Error fetching user orders:', error);
+                rentOrdersContainer.innerHTML = '<p>Error fetching rent orders. Please try again later.</p>';
+                buyOrdersContainer.innerHTML = '<p>Error fetching buy orders. Please try again later.</p>';
+            }
         };
     </script>
 </body>

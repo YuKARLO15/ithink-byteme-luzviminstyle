@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rent Item</title>
-  <link rel="stylesheet" href="rentshop.css">
+  <title>Buy Item</title>
+  <link rel="stylesheet" href="buyshop.css">
 </head>
 <body>
     <header class="header">
@@ -16,18 +16,21 @@
         </nav>
     </header>
 
-    <div class="rent-container">
+    <div class="buy-container">
         <h2 id="item-name">Item Name</h2>
-        <p id="rent-price">Rent Price Per Hour: ₱0.00</p>
+        <p id="item-quantity">Quantity Available: 0</p>
+        <p id="buy-price">Price: ₱0.00</p>
         
-        <form id="rentForm">
+        <form id="buyForm">
           <div class="form-group">
-            <label for="hours">Number of Hours:</label>
-            <input type="number" id="hours" name="hours" min="1" required>
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" min="1" required>
           </div>
           <button type="submit">Calculate Total Cost</button>
         </form>
+        
         <p id="total-cost">Total Cost: ₱0.00</p>
+        <p id="error-message" style="color: red; display: none;">Quantity exceeds available stock.</p>
         
         <!-- Check Out Button -->
         <button id="check-out" style="display: none;">Check Out</button>
@@ -65,7 +68,7 @@
     <!-- Your custom script -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
-        import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
+        import { getDatabase, ref, get, set, update } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
         
         // Firebase configuration
         const firebaseConfig = {
@@ -82,7 +85,7 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
-
+    
         // Function to get query parameters
         function getQueryParams() {
           const params = new URLSearchParams(window.location.search);
@@ -92,8 +95,8 @@
         }
         
         async function getNextOrderId() {
-          const idRef = ref(db, 'transaction/rentorderIdCounter');
-          let nextId = 'RNT0001'; // Default starting ID
+          const idRef = ref(db, 'transaction/buyorderIdCounters');
+          let nextId = 'BUY0001'; // Default starting ID
 
           try {
             const snapshot = await get(idRef);
@@ -102,9 +105,9 @@
             }
 
             // Increment the ID
-            const currentIdNumber = parseInt(nextId.replace('RNT', ''), 10);
+            const currentIdNumber = parseInt(nextId.replace('BUY', ''), 10);
             const newIdNumber = currentIdNumber + 1;
-            nextId = 'RNT' + newIdNumber.toString().padStart(4, '0');
+            nextId = 'BUY' + newIdNumber.toString().padStart(4, '0');
 
             // Update the counter in the database
             await set(idRef, nextId);
@@ -118,20 +121,23 @@
         window.onload = function() {
           const params = getQueryParams();
           const itemNameElement = document.getElementById('item-name');
-          const rentPriceElement = document.getElementById('rent-price');
+          const itemQuantityElement = document.getElementById('item-quantity');
+          const buyPriceElement = document.getElementById('buy-price');
           const itemName = params.name;
-
+    
           if (itemName) {
             const itemRef = ref(db, 'items/' + itemName);
             get(itemRef).then((snapshot) => {
               if (snapshot.exists()) {
                 const itemData = snapshot.val();
                 itemNameElement.textContent = itemName;
-                const rentPrice = parseFloat(itemData.rentPrice);
-                rentPriceElement.textContent = isNaN(rentPrice) ? 'Rent Price Per Hour: ₱0.00' : `Rent Price Per Hour: ₱${rentPrice.toFixed(2)}`;
+                itemQuantityElement.textContent = `Quantity Available: ${itemData.quantity}`;
+                const buyPrice = parseFloat(itemData.price);
+                buyPriceElement.textContent = isNaN(buyPrice) ? 'Price: ₱0.00' : `Price: ₱${buyPrice.toFixed(2)}`;
               } else {
                 itemNameElement.textContent = 'Item not found';
-                rentPriceElement.textContent = 'Rent Price Per Hour: ₱0.00';
+                itemQuantityElement.textContent = 'Quantity Available: 0';
+                buyPriceElement.textContent = 'Price: ₱0.00';
               }
             }).catch((error) => {
               console.error('Error fetching data:', error);
@@ -139,11 +145,11 @@
           }
         };
       
-        // Handle rent form submission
-        document.getElementById('rentForm').addEventListener('submit', function(event) {
+        // Handle buy form submission
+        document.getElementById('buyForm').addEventListener('submit', function(event) {
           event.preventDefault();
           
-          const hours = document.getElementById('hours').value;
+          const quantity = parseInt(document.getElementById('quantity').value, 10);
           const itemName = getQueryParams().name;
           
           if (itemName) {
@@ -151,11 +157,24 @@
             get(itemRef).then((snapshot) => {
               if (snapshot.exists()) {
                 const itemData = snapshot.val();
-                const rentPricePerHour = parseFloat(itemData.rentPrice);
-                const totalCost = isNaN(rentPricePerHour) ? 0 : rentPricePerHour * hours;
-                document.getElementById('total-cost').textContent = `Total Cost: ₱${totalCost.toFixed(2)}`;
-                document.getElementById('total-cost').style.display = 'block'; // Show total cost
-                document.getElementById('check-out').style.display = 'block';
+                const availableQuantity = itemData.quantity;
+                const pricePerItem = parseFloat(itemData.price);
+                
+                if (quantity > availableQuantity) {
+                  // Show error if quantity exceeds available stock
+                  document.getElementById('error-message').style.display = 'block';
+                  document.getElementById('total-cost').textContent = 'Total Cost: ₱0.00';
+                  document.getElementById('total-cost').style.display = 'none'; // Hide total cost
+                  document.getElementById('check-out').style.display = 'none'; // Hide checkout button
+                } else {
+                  document.getElementById('error-message').style.display = 'none'; // Hide error message
+                  const totalCost = isNaN(pricePerItem) ? 0 : pricePerItem * quantity;
+                  document.getElementById('total-cost').textContent = `Total Cost: ₱${totalCost.toFixed(2)}`;
+                  document.getElementById('total-cost').style.display = 'block'; // Show total cost
+                  document.getElementById('check-out').style.display = 'block'; // Show checkout button
+                }
+              } else {
+                console.error('Item not found in database');
               }
             }).catch((error) => {
               console.error('Error fetching data:', error);
@@ -186,38 +205,55 @@
         document.getElementById('gcash-form').addEventListener('submit', async function(event) {
           event.preventDefault();
           
+          const orderId = await getNextOrderId();
           const senderName = document.getElementById('gcash-name').value;
           const referenceNumber = document.getElementById('gcash-reference').value;
-          const amount = document.getElementById('gcash-amount').value;
+          const totalCost = document.getElementById('gcash-amount').value;
+          const quantity = parseInt(document.getElementById('quantity').value, 10);
+          const itemName = getQueryParams().name;
           const username = localStorage.getItem('loggedInUser'); // Get username from localStorage
+          
+          // Fetch the available quantity again
+          const itemRef = ref(db, 'items/' + itemName);
+          try {
+            const itemSnapshot = await get(itemRef);
+            if (itemSnapshot.exists()) {
+              const itemData = itemSnapshot.val();
+              const availableQuantity = itemData.quantity;
 
-          // Generate a new order ID
-          const orderId = await getNextOrderId();
+              if (quantity > availableQuantity) {
+                alert('Quantity exceeds available stock. Please reduce the quantity.');
+                return;
+              }
 
-          const orderData = {
-            itemName: getQueryParams().name,
-            rentPricePerHour: parseFloat(document.getElementById('rent-price').textContent.replace('Rent Price Per Hour: ₱', '')),
-            hours: document.getElementById('hours').value,
-            totalCost: amount,
-            paymentMode: 'GCash',
-            senderName: senderName,
-            referenceNumber: referenceNumber,
-            timestamp: new Date().toISOString(),
-            orderId: orderId
-          };
+              // Update Firebase with the order details
+              const orderRef = ref(db, `buyorders/${username}/${orderId}`);
+              await set(orderRef, {
+                orderId: orderId,
+                itemName: itemName,
+                quantity: quantity,
+                totalCost: totalCost,
+                paymentMode: 'GCash',
+                referenceNumber: referenceNumber,
+                senderName: senderName,
+                timestamp: new Date().toISOString()
+              });
 
-          // Add order to Firebase under the username node
-          const ordersRef = ref(db, `rentorders/${username}/${orderId}`);
+              // Update the item quantity in Firebase
+              await update(itemRef, { quantity: availableQuantity - quantity });
 
-          set(ordersRef, orderData).then(() => {
-            alert('Order placed successfully!');
-            // Redirect to shop.html after alert
-           window.location.href = 'userorder.html';
-          }).catch((error) => {
+              alert('Order placed successfully!');
+              document.getElementById('gcash-form').reset();
+              modal.style.display = 'none';
+              window.location.href = 'userorder.html';
+            } else {
+              console.error('Item not found in database');
+            }
+          } catch (error) {
             console.error('Error placing order:', error);
-          });
+          }
         });
-
     </script>
+    
 </body>
 </html>
